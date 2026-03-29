@@ -1,0 +1,6 @@
+---
+- name: OS packaging configuration
+  ansible.builtin.include_tasks: packages.yml
+
+- name: General OS configuration
+  ansible.builtin.include_tasks: general.yml

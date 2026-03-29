@@ -1,0 +1,35 @@
+arch_timezone: 'Europe/London'
+
+arch_packages:
+  misc:
+    - base-devel
+    - bash
+    - bash-completion
+    - openssh
+    - open-vm-tools
+    - tree
+    - ttf-fira-code
+
+  tools:
+    - azure-cli
+    - docker
+    - docker-compose
+    - git
+    - packer
+    - rclone
+    - terraform
+
+  networking:
+    - bind
+    - iproute2
+    - iputils
+    - rdap
+
+  languages:
+    - go
+    - pyenv
+    - python
+
+arch_aur_packages:
+  - visual-studio-code-bin
+  - google-chrome
