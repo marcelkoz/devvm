@@ -1,0 +1,21 @@
+{{ ansible_managed | comment }}
+
+set -e
+
+DISK='{{ bootstrap_partition_primary_disk.device_path }}'
+wipefs -a "$DISK"
+
+s_parted() {
+    parted --script "$DISK" "$@"
+}
+
+s_parted mklabel gpt
+s_parted mkpart EFI fat32 1MiB 1025MiB
+s_parted set 1 esp on
+s_parted mkpart ROOT ext4 1025MiB 100%
+
+EFI_PART='{{ bootstrap_partition_primary_disk.boot_partition_path }}'
+ROOT_PART='{{ bootstrap_partition_primary_disk.root_partition_path }}'
+
+mkfs.fat -F 32 "$EFI_PART"
+mkfs.ext4 "$ROOT_PART"

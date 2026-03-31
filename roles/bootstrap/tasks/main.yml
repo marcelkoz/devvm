@@ -1,0 +1,141 @@
+# https://wiki.archlinux.org/title/Installation_guide
+- name: Check UEFI boot mode file exists
+  ansible.builtin.stat:
+    path: /sys/firmware/efi/fw_platform_size
+  register: bootstrap_uefi_mode_result
+
+- name: Assert boot mode is UEFI
+  ansible.builtin.assert:
+    that: bootstrap_uefi_mode_result.stat.exists
+
+- name: Check UEFI variables directory exists
+  # noqa: no-changed-when
+  ansible.builtin.stat:
+    path: /sys/firmware/efi/efivars
+  register: bootstrap_uefi_vars_result
+
+- name: Assert UEFI variables are accessible (essential for bootloader)
+  ansible.builtin.assert:
+    that: bootstrap_uefi_vars_result.stat.exists
+
+- name: Create temp directory
+  ansible.builtin.file:
+    path: '{{ bootstrap_temp_directory_path }}'
+    state: directory
+    mode: '0700'
+
+- name: Ping host to check internet connectivity
+  # noqa: no-changed-when
+  ansible.builtin.command: 'ping {{ bootstrap_ping_target }} -c {{ bootstrap_ping_attempts }}'
+  register: bootstrap_ping_result
+
+- name: Assert internet connectivity
+  ansible.builtin.assert:
+    that: bootstrap_ping_result.rc == 0
+
+- name: Set the timezone
+  community.general.timezone:
+    name: '{{ bootstrap_timezone }}'
+
+- name: Template the disk partitioning bash script
+  ansible.builtin.template:
+    src: templates/partition-disk.sh.j2
+    dest: '{{ bootstrap_partition_script_path }}'
+    mode: '0500'
+
+- name: Run disk partitioning bash script
+  ansible.builtin.command: '{{ bootstrap_partition_script_path }}'
+  args:
+    creates: '{{ bootstrap_partition_script_completion_path }}'
+
+- name: Mark disk partitioning as complete
+  ansible.builtin.file:
+    path: '{{ bootstrap_partition_script_completion_path }}'
+    mode: '{{ bootstrap_completion_file_permissions }}'
+    modification_time: preserve
+    access_time: preserve
+    state: touch
+
+- name: Mount root disk partition
+  ansible.posix.mount:
+    path: '{{ bootstrap_mount_point.root }}'
+    src: '{{ bootstrap_partition_primary_disk.root_partition_path }}'
+    fstype: '{{ bootstrap_partition_primary_disk.root_partition_type }}'
+    state: mounted
+
+- name: Mount boot disk partition
+  ansible.posix.mount:
+    path: '{{ bootstrap_mount_point.boot }}'
+    src: '{{ bootstrap_partition_primary_disk.boot_partition_path }}'
+    fstype: '{{ bootstrap_partition_primary_disk.boot_partition_type }}'
+    state: mounted
+
+- name: Filter pacman mirror list to the fastest ones
+  ansible.builtin.command:
+    argv:
+      - reflector
+      - --country={{ bootstrap_pacman_mirror_locations | join(',') }}
+      - --save={{ bootstrap_pacman_mirror_list_temp_path }}
+      - --sort=rate
+      - --fastest=20
+      - --protocol=https
+      - --threads=4
+    creates: '{{ bootstrap_pacman_mirror_list_temp_path }}'
+
+- name: Overwrite pacman mirror list
+  ansible.builtin.copy:
+    src: '{{ bootstrap_pacman_mirror_list_temp_path }}'
+    dest: '{{ bootstrap_pacman_mirror_list_path }}'
+    mode: '0644'
+    remote_src: true
+
+- name: Run pacstrap
+  ansible.builtin.command: 'pacstrap -K {{ bootstrap_mount_point.root }} {{ bootstrap_pacstrap_essential_packages | join(" ") }}'
+  args:
+    creates: '{{ bootstrap_pacstrap_completion_path }}'
+
+- name: Mark pacstrap as complete
+  ansible.builtin.file:
+    path: '{{ bootstrap_pacstrap_completion_path }}'
+    mode: '{{ bootstrap_completion_file_permissions }}'
+    modification_time: preserve
+    access_time: preserve
+    state: touch
+
+- name: Generate fstab
+  ansible.builtin.command:
+    argv:
+      - bash
+      - -c
+      - genfstab -U {{ bootstrap_mount_point.root }} >> {{ bootstrap_fstab_path }}
+    creates: '{{ bootstrap_fstab_completion_path }}'
+
+- name: Mark fstab as complete
+  ansible.builtin.file:
+    path: '{{ bootstrap_fstab_completion_path }}'
+    mode: '{{ bootstrap_completion_file_permissions }}'
+    modification_time: preserve
+    access_time: preserve
+    state: touch
+
+- name: Template arch-chroot bash script
+  ansible.builtin.template:
+    src: templates/chroot-commands.sh.j2
+    dest: '{{ bootstrap_chroot_script_path_live }}'
+    mode: '0500'
+
+- name: Run arch-chroot bash script
+  ansible.builtin.command: arch-chroot {{ bootstrap_mount_point.root }} bash {{ bootstrap_chroot_script_path_chroot }}
+  args:
+    creates: '{{ bootstrap_chroot_completion_path }}'
+
+- name: Mark chroot as complete
+  ansible.builtin.file:
+    path: '{{ bootstrap_chroot_completion_path }}'
+    mode: '{{ bootstrap_completion_file_permissions }}'
+    modification_time: preserve
+    access_time: preserve
+    state: touch
+
+# TODO: networking
+# TODO: dns

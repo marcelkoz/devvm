@@ -1,0 +1,17 @@
+{{ ansible_managed | comment }}
+
+# locale and time setup
+ln -sf /usr/share/zoneinfo/{{ bootstrap_timezone }} /etc/localtime
+hwclock --systohc
+echo '{{ bootstrap_locale_full }}' > /etc/locale.gen
+locale-gen
+echo 'LANG={{ bootstrap_locale_partial }}' > /etc/locale.conf
+echo 'KEYMAP={{ bootstrap_keymap }}' > /etc/vconsole.conf
+
+# general
+echo '{{ bootstrap_hostname }}' > /etc/hostname
+echo 'root:{{ ansible_become_pass }}' | chpasswd
+
+# systemd
+bootctl install
+systemctl enable systemd-networkd

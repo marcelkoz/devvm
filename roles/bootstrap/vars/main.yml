@@ -1,0 +1,47 @@
+bootstrap_timezone: Europe/London
+bootstrap_locale_full: en_GB.UTF-8 UTF-8
+bootstrap_locale_partial: en_GB.UTF-8
+bootstrap_keymap: uk
+bootstrap_hostname: mort
+
+bootstrap_temp_directory_path: /tmp/ansible-bootstrap
+bootstrap_completion_file_permissions: '0444'
+
+bootstrap_ping_target: ping.archlinux.org
+bootstrap_ping_attempts: 3
+
+bootstrap_partition_script_path: '{{ bootstrap_temp_directory_path }}/partition-disk.sh'
+bootstrap_partition_script_completion_path: '{{ bootstrap_temp_directory_path }}/partition.complete'
+bootstrap_partition_primary_disk:
+  device_path: /dev/sda
+  boot_partition_path: /dev/sda1
+  boot_partition_type: vfat # fat32
+  root_partition_path: /dev/sda2
+  root_partition_type: ext4
+
+bootstrap_mount_point:
+  root: /mnt
+  boot: /mnt/boot
+
+bootstrap_pacman_mirror_list_path: /etc/pacman.d/mirrorlist
+bootstrap_pacman_mirror_list_temp_path: '{{ bootstrap_temp_directory_path }}/mirrorlist'
+bootstrap_pacman_mirror_locations:
+  - United Kingdom
+  - France
+  - Germany
+  - Worldwide
+
+bootstrap_pacstrap_completion_path: '{{ bootstrap_temp_directory_path }}/pacstrap.complete'
+bootstrap_pacstrap_essential_packages:
+  - base
+  - linux
+  - linux-firmware
+
+bootstrap_fstab_completion_path: '{{ bootstrap_temp_directory_path }}/fstab.complete'
+bootstrap_fstab_path: '{{ bootstrap_mount_point.root }}/etc/fstab'
+
+bootstrap_chroot_completion_path: '{{ bootstrap_temp_directory_path }}/chroot.complete'
+# path in the chroot environment
+bootstrap_chroot_script_path_chroot: '/root/chroot-commands.sh'
+# path in the live iso environment
+bootstrap_chroot_script_path_live: '{{ bootstrap_mount_point.root }}{{ bootstrap_chroot_script_path_chroot }}'
