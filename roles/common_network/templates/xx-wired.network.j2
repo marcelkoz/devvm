@@ -1,0 +1,12 @@
+{{ ansible_managed | comment }}
+
+[Match]
+{% for interface in common_network_wired_interfaces %}
+Name={{ interface }}
+{% endfor %}
+
+[Link]
+RequiredForOnline=routable
+
+[Network]
+DHCP={{ common_network_wired_dhcp }}

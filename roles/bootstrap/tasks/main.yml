@@ -163,3 +163,10 @@
     dest: '{{ bootstrap_bootloader_entries_directory_path }}/{{ item.name }}'
     mode: '{{ bootstrap_bootloader_file_permissions }}'
   loop: '{{ bootstrap_bootloader_entries }}'
+
+- name: Import common_network role
+  ansible.builtin.include_role:
+    name: common_network
+  vars:
+    common_network_interface_config_directory_path: '{{ bootstrap_mount_point.root }}/etc/systemd/network'
+    common_network_resolv_symlink_destination_path: '{{ bootstrap_mount_point.root }}/etc/resolv.conf'

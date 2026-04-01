@@ -1,0 +1,21 @@
+- name: Template wired network interface config files
+  ansible.builtin.template:
+    src: templates/xx-wired.network.j2
+    dest: '{{ common_network_interface_config_directory_path }}/20-wired.network'
+    mode: '0444'
+
+- name: Symlink resolv.conf file
+  ansible.builtin.file:
+    src: '{{ common_network_resolv_symlink_source_path }}'
+    dest: '{{ common_network_resolv_symlink_destination_path }}'
+    force: true
+    follow: false
+    state: link
+
+- name: Start networking services
+  ansible.builtin.service:
+    name: '{{ item }}'
+    state: started
+  loop:
+    - systemd-networkd
+    - systemd-resolved
