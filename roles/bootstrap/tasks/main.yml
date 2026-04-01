@@ -118,6 +118,7 @@
     access_time: preserve
     state: touch
 
+# TODO: separate locale config into common_locale role
 - name: Template arch-chroot bash script
   ansible.builtin.template:
     src: templates/chroot-commands.sh.j2
