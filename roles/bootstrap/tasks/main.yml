@@ -138,6 +138,11 @@
     access_time: preserve
     state: touch
 
+- name: Cleanup arch-chroot bash script
+  ansible.builtin.file:
+    path: '{{ bootstrap_chroot_script_path_live }}'
+    state: absent
+
 - name: Fetch root partition UUID
   # noqa: no-changed-when
   ansible.builtin.command: lsblk -dno UUID {{ bootstrap_partition_primary_disk.root_partition_path }}
