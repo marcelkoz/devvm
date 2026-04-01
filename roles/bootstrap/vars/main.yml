@@ -36,6 +36,8 @@ bootstrap_pacstrap_essential_packages:
   - base
   - linux
   - linux-firmware
+  - openssh
+  - python
 
 bootstrap_fstab_completion_path: '{{ bootstrap_temp_directory_path }}/fstab.complete'
 bootstrap_fstab_path: '{{ bootstrap_mount_point.root }}/etc/fstab'

@@ -16,3 +16,6 @@ echo 'root:{{ ansible_become_pass }}' | chpasswd
 bootctl install
 systemctl enable systemd-networkd
 systemctl enable systemd-resolved
+
+# ansible
+systemctl enable sshd
