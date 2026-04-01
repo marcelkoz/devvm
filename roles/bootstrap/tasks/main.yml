@@ -137,5 +137,29 @@
     access_time: preserve
     state: touch
 
-# TODO: networking
-# TODO: dns
+- name: Fetch root partition UUID
+  # noqa: no-changed-when
+  ansible.builtin.command: lsblk -dno UUID {{ bootstrap_partition_primary_disk.root_partition_path }}
+  register: bootstrap_root_partition_uuid_result
+
+- name: Assert root partition UUID command succeeded
+  ansible.builtin.assert:
+    that: not bootstrap_root_partition_uuid_result.failed
+
+- name: Root partition UUID
+  ansible.builtin.debug:
+    msg: '{{ bootstrap_root_partition_uuid_result.stdout }}'
+
+# TODO: separate bootloader config into common_bootloader role
+- name: Template systemd-boot main config file
+  ansible.builtin.template:
+    src: 'templates/loader.conf.j2'
+    dest: '{{ bootstrap_bootloader_config_file_path }}'
+    mode: '{{ bootstrap_bootloader_file_permissions }}'
+
+- name: Template systemd-boot entries
+  ansible.builtin.template:
+    src: '{{ item.template }}'
+    dest: '{{ bootstrap_bootloader_entries_directory_path }}/{{ item.name }}'
+    mode: '{{ bootstrap_bootloader_file_permissions }}'
+  loop: '{{ bootstrap_bootloader_entries }}'

@@ -45,3 +45,16 @@ bootstrap_chroot_completion_path: '{{ bootstrap_temp_directory_path }}/chroot.co
 bootstrap_chroot_script_path_chroot: '/root/chroot-commands.sh'
 # path in the live iso environment
 bootstrap_chroot_script_path_live: '{{ bootstrap_mount_point.root }}{{ bootstrap_chroot_script_path_chroot }}'
+
+bootstrap_bootloader_entries_directory_path: '{{ bootstrap_mount_point.boot }}/loader/entries'
+bootstrap_bootloader_config_file_path: '{{ bootstrap_mount_point.boot }}/loader/loader.conf'
+bootstrap_bootloader_file_permissions: '0755'
+bootstrap_bootloader_entries:
+  - { template: 'templates/arch.conf.j2', name: 'arch.conf' }
+  - { template: 'templates/arch-shell.conf.j2', name: 'arch-shell.conf' }
+  - { template: 'templates/arch-fallback.conf.j2', name: 'arch-fallback.conf' }
+
+bootstrap_bootloader_timeout_in_seconds: 3
+bootstrap_bootloader_resolution: auto
+bootstrap_bootloader_reboot_entry: true
+bootstrap_bootloader_firmware_entry: true

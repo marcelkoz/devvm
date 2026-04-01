@@ -1,0 +1,6 @@
+{{ ansible_managed | comment }}
+
+title    Arch Linux (Fallback)
+linux    /vmlinuz-linux
+initrd   /initramfs-linux-fallback.img
+options  root=UUID={{ bootstrap_root_partition_uuid_result.stdout }} rw

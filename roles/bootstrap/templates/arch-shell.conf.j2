@@ -1,0 +1,6 @@
+{{ ansible_managed | comment }}
+
+title    Arch Linux (Shell)
+linux    /vmlinuz-linux
+initrd   /initramfs-linux.img
+options  root=UUID={{ bootstrap_root_partition_uuid_result.stdout }} rw systemd.target=multi-user.target
