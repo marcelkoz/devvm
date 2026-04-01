@@ -41,10 +41,10 @@
   ansible.builtin.template:
     src: templates/partition-disk.sh.j2
     dest: '{{ bootstrap_partition_script_path }}'
-    mode: '0500'
+    mode: '0400'
 
 - name: Run disk partitioning bash script
-  ansible.builtin.command: '{{ bootstrap_partition_script_path }}'
+  ansible.builtin.command: bash {{ bootstrap_partition_script_path }}
   args:
     creates: '{{ bootstrap_partition_script_completion_path }}'
 
