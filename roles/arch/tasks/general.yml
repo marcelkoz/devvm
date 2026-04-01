@@ -1,3 +1,0 @@
-- name: Set the timezone
-  community.general.timezone:
-    name: '{{ arch_timezone }}'

@@ -1,6 +1,9 @@
----
-- name: OS packaging configuration
-  ansible.builtin.include_tasks: packages.yml
-
-- name: General OS configuration
-  ansible.builtin.include_tasks: general.yml
+- name: Check specified packages are installed
+  community.general.pacman:
+    name: '{{ item }}'
+    state: present
+  loop:
+    - '{{ arch_packages.misc }}'
+    - '{{ arch_packages.tools }}'
+    - '{{ arch_packages.networking }}'
+    - '{{ arch_packages.languages }}'
