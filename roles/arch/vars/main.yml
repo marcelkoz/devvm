@@ -15,15 +15,17 @@ arch_packages:
     - docker
     - docker-compose
     - git
+    - nano
     - packer
     - rclone
     - terraform
+    - vim
 
   networking:
     - bind
     - iproute2
     - iputils
-    - rdap
+    - whois
 
   languages:
     - go
