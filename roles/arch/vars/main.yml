@@ -10,6 +10,8 @@ arch_packages:
     - open-vm-tools
     - tree
     - ttf-fira-code
+    - unzip
+    - zip
 
   tools:
     - azure-cli
