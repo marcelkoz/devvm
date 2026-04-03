@@ -1,0 +1,29 @@
+- name: Template git config
+  ansible.builtin.template:
+    src: 'templates/gitconfig.j2'
+    dest: '{{ item }}'
+    mode: '0644'
+  loop:
+    - '{{ arch_dev_user_result.home }}/.gitconfig'
+
+- name: Clone repos to dev user
+  # noqa: latest
+  ansible.builtin.git:
+    repo: '{{ item.value }}'
+    dest: '{{ arch_dev_user_result.home }}/{{ arch_dev_user_home_directories.repos }}/{{ item.key }}'
+    clone: true
+  loop: '{{ arch_dev_user_git_repos | dict2items }}'
+  register: arch_dev_user_repos_result
+
+- name: Run dotfiles script
+  # noqa: no-changed-when
+  ansible.builtin.command:
+    argv:
+      - sudo
+      - -u
+      - '{{ arch_dev_user_name }}'
+      - python
+      - '{{ arch_dev_user_result.home }}/{{ arch_dev_user_home_directories.repos }}/dotfiles/dotfiles.py'
+      - --create-symlinks
+      - --disable-safe-mode
+      - '{{ arch_dev_user_result.home }}/{{ arch_dev_user_home_directories.repos }}/dotfiles'

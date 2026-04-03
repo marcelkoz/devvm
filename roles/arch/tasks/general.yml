@@ -1,0 +1,32 @@
+- name: Check specified packages are installed
+  community.general.pacman:
+    name: '{{ item }}'
+    state: present
+  loop:
+    - '{{ arch_packages.misc }}'
+    - '{{ arch_packages.tools }}'
+    - '{{ arch_packages.networking }}'
+    - '{{ arch_packages.languages }}'
+
+- name: Template sudoers config
+  ansible.builtin.template:
+    src: 'templates/xx-wheel.j2'
+    dest: '{{ arch_sudo_config_directory_path }}/10-wheel'
+    mode: '0440'
+
+- name: Add dev user
+  ansible.builtin.user:
+    name: '{{ arch_dev_user_name }}'
+    shell: '{{ arch_dev_user_shell }}'
+    groups: '{{ arch_dev_user_groups }}'
+    append: true
+  register: arch_dev_user_result
+
+- name: Create home directory structure for dev user
+  ansible.builtin.file:
+    path: '{{ arch_dev_user_result.home }}/{{ item.value }}'
+    owner: '{{ arch_dev_user_name }}'
+    group: '{{ arch_dev_user_name }}'
+    mode: '0755'
+    state: directory
+  loop: '{{ arch_dev_user_home_directories | dict2items }}'

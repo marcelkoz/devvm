@@ -1,74 +1,9 @@
-- name: Check specified packages are installed
-  community.general.pacman:
-    name: '{{ item }}'
-    state: present
-  loop:
-    - '{{ arch_packages.misc }}'
-    - '{{ arch_packages.tools }}'
-    - '{{ arch_packages.networking }}'
-    - '{{ arch_packages.languages }}'
+---
+- name: General configuration
+  ansible.builtin.include_tasks: general.yml
 
-- name: Template sudoers config
-  ansible.builtin.template:
-    src: 'templates/xx-wheel.j2'
-    dest: '{{ arch_sudo_config_directory_path }}/10-wheel'
-    mode: '0440'
-
-- name: Add dev user
-  ansible.builtin.user:
-    name: '{{ arch_dev_user_name }}'
-    shell: '{{ arch_dev_user_shell }}'
-    groups: '{{ arch_dev_user_groups }}'
-    append: true
-  register: arch_dev_user_result
-
-- name: Create home directory structure for dev user
-  ansible.builtin.file:
-    path: '{{ arch_dev_user_result.home }}/{{ item.value }}'
-    owner: '{{ arch_dev_user_name }}'
-    group: '{{ arch_dev_user_name }}'
-    mode: '0755'
-    state: directory
-  loop: '{{ arch_dev_user_home_directories | dict2items }}'
-
-- name: Template git config
-  ansible.builtin.template:
-    src: 'templates/gitconfig.j2'
-    dest: '{{ item.path }}'
-    owner: '{{ item.user }}'
-    group: '{{ item.group }}'
-    mode: '0644'
-  loop:
-    - { path: /root/.gitconfig, user: root, group: root }
-    - { path: '{{ arch_dev_user_result.home }}/.gitconfig', user: '{{ arch_dev_user_name }}', group: '{{ arch_dev_user_name }}' }
-
-- name: Clone repos to dev user
-  # noqa: latest
-  ansible.builtin.git:
-    repo: '{{ item.value }}'
-    dest: '{{ arch_dev_user_result.home }}/{{ arch_dev_user_home_directories.repos }}/{{ item.key }}'
-    clone: true
-  loop: '{{ arch_dev_user_git_repos | dict2items }}'
-  register: arch_dev_user_repos_result
-
-- name: Change repos ownership to the dev user
-  ansible.builtin.file:
-    path: '{{ item }}'
-    owner: '{{ arch_dev_user_name }}'
-    group: '{{ arch_dev_user_name }}'
-    recurse: true
-    state: directory
-  loop: '{{ arch_dev_user_repos_result.results | map(attribute="invocation.module_args.dest") }}'
-
-- name: Run dotfiles script
-  # noqa: no-changed-when
-  ansible.builtin.command:
-    argv:
-      - sudo
-      - -u
-      - '{{ arch_dev_user_name }}'
-      - python
-      - '{{ arch_dev_user_result.home }}/{{ arch_dev_user_home_directories.repos }}/dotfiles/dotfiles.py'
-      - --create-symlinks
-      - --disable-safe-mode
-      - '{{ arch_dev_user_result.home }}/{{ arch_dev_user_home_directories.repos }}/dotfiles'
+- name: Git configuration
+  ansible.builtin.include_tasks: git.yml
+  args:
+    apply:
+      become_user: '{{ arch_dev_user_name }}'
