@@ -19,9 +19,6 @@
   # noqa: no-changed-when
   ansible.builtin.command:
     argv:
-      - sudo
-      - -u
-      - '{{ arch_dev_user_name }}'
       - python
       - '{{ arch_dev_user_result.home }}/{{ arch_dev_user_home_directories.repos }}/dotfiles/dotfiles.py'
       - --create-symlinks
