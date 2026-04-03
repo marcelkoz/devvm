@@ -39,6 +39,7 @@ arch_packages:
     - kde-graphics-meta
     - kde-system-meta
     - kde-utilities-meta
+    - kitty
     - plasma-login-manager
     - plasma-meta
 
