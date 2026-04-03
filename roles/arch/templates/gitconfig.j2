@@ -1,0 +1,10 @@
+{{ ansible_managed | comment }}
+
+[safe]
+{% for repo in arch_dev_user_git_repos %}
+    directory = {{ arch_dev_user_result.home }}/{{ arch_dev_user_home_directories.repos }}/{{ repo }}
+{% endfor %}
+
+[user]
+    name = {{ arch_git_user_name }}
+    email = {{ arch_git_user_email }}

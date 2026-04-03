@@ -5,6 +5,7 @@ arch_packages:
     - base-devel
     - bash
     - bash-completion
+    - less
     - openssh
     - open-vm-tools
     - tree
@@ -35,3 +36,24 @@ arch_packages:
 arch_aur_packages:
   - visual-studio-code-bin
   - google-chrome
+
+arch_sudo_config_directory_path: /etc/sudoers.d
+arch_sudo_group: wheel
+
+arch_dev_user_name: marcel
+arch_dev_user_shell: /bin/bash
+arch_dev_user_groups:
+  - '{{ arch_sudo_group }}'
+
+arch_dev_user_git_repos:
+  dotfiles: https://github.com/marcelkoz/dotfiles
+
+arch_dev_user_home_directories:
+  repos: Repos
+  desktop: Desktop
+  downloads: Downloads
+  documents: Documents
+  scratch: Scratch
+
+arch_git_user_name: Marcel Kozlowski
+arch_git_user_email: 37003922+marcelkoz@users.noreply.github.com
