@@ -35,5 +35,3 @@
   loop:
     - plasmalogin
     - vmtoolsd
-
-# TODO: config open-vm-tools (vmblock)

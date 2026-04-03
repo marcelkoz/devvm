@@ -5,6 +5,7 @@ arch_packages:
     - base-devel
     - bash
     - bash-completion
+    - gtkmm3 # vmware clipboard sharing
     - less
     - open-vm-tools
     - openssh
