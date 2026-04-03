@@ -1,3 +1,4 @@
 {{ ansible_managed | comment }}
 
-%{{ arch_sudo_group }}      ALL=(ALL:ALL) ALL
+Cmnd_Alias ALLOWED_PROGRAMS = {{ arch_sudo_allowed_programs | join(',') }}
+%{{ arch_sudo_group }} ALL=(ALL:ALL) ALLOWED_PROGRAMS
