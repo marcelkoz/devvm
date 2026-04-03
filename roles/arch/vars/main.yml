@@ -6,8 +6,8 @@ arch_packages:
     - bash
     - bash-completion
     - less
-    - openssh
     - open-vm-tools
+    - openssh
     - tree
     - ttf-fira-code
     - unzip
@@ -36,8 +36,8 @@ arch_packages:
     - python
 
 arch_aur_packages:
-  - visual-studio-code-bin
   - google-chrome
+  - visual-studio-code-bin
 
 arch_sudo_config_directory_path: /etc/sudoers.d
 arch_sudo_group: wheel
