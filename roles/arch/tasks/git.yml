@@ -6,11 +6,15 @@
   loop:
     - '{{ arch_dev_user_result.home }}/.gitconfig'
 
+- name: Set repos directory
+  set_fact:
+    arch_repos_directory_path: '{{ arch_dev_user_result.home }}/{{ arch_dev_user_home_directories.repos }}'
+
 - name: Clone repos to dev user
   # noqa: latest
   ansible.builtin.git:
     repo: '{{ item.value }}'
-    dest: '{{ arch_dev_user_result.home }}/{{ arch_dev_user_home_directories.repos }}/{{ item.key }}'
+    dest: '{{ arch_repos_directory_path }}/{{ item.key }}'
     clone: true
   loop: '{{ arch_dev_user_git_repos | dict2items }}'
   register: arch_dev_user_repos_result
@@ -20,7 +24,7 @@
   ansible.builtin.command:
     argv:
       - python
-      - '{{ arch_dev_user_result.home }}/{{ arch_dev_user_home_directories.repos }}/dotfiles/dotfiles.py'
+      - '{{ arch_repos_directory_path }}/dotfiles/dotfiles.py'
       - --create-symlinks
       - --disable-safe-mode
-      - '{{ arch_dev_user_result.home }}/{{ arch_dev_user_home_directories.repos }}/dotfiles'
+      - '{{ arch_repos_directory_path }}/dotfiles'
