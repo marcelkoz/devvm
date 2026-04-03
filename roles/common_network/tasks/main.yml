@@ -12,9 +12,10 @@
     follow: false
     state: link
 
-- name: Start networking services
+- name: Enable and start networking services
   ansible.builtin.service:
     name: '{{ item }}'
+    enabled: true
     state: started
   loop:
     - systemd-networkd
