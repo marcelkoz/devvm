@@ -35,6 +35,13 @@ arch_packages:
     - pyenv
     - python
 
+  graphical:
+    - kde-graphics-meta
+    - kde-system-meta
+    - kde-utilities-meta
+    - plasma-login-manager
+    - plasma-meta
+
 arch_aur_packages:
   - google-chrome
   - visual-studio-code-bin

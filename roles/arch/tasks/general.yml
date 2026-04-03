@@ -7,6 +7,7 @@
     - '{{ arch_packages.tools }}'
     - '{{ arch_packages.networking }}'
     - '{{ arch_packages.languages }}'
+    - '{{ arch_packages.graphical }}'
 
 - name: Template sudoers config
   ansible.builtin.template:
@@ -30,3 +31,9 @@
     mode: '0755'
     state: directory
   loop: '{{ arch_dev_user_home_directories | dict2items }}'
+
+- name: Enable and start platform login manager service
+  ansible.builtin.service:
+    name: plasmalogin
+    enabled: true
+    state: started
