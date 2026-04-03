@@ -27,8 +27,13 @@
     state: directory
   loop: '{{ arch_dev_user_home_directories | dict2items }}'
 
-- name: Enable and start platform login manager service
+- name: Enable and start services
   ansible.builtin.service:
-    name: plasmalogin
+    name: '{{ item }}'
     enabled: true
     state: started
+  loop:
+    - plasmalogin
+    - vmtoolsd
+
+# TODO: config open-vm-tools (vmblock)

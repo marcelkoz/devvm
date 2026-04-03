@@ -1,0 +1,44 @@
+- name: Remove unecessary directories in the dev user home created by KDE
+  ansible.builtin.file:
+    path: '{{ arch_dev_user_result.home }}/{{ item }}'
+    state: absent
+  loop:
+    - Music
+    - Pictures
+    - Public
+    - Templates
+    - Videos
+
+# https://github.com/shalva97/kde-configuration-files
+- name: Set KDE config directory fact
+  ansible.builtin.set_fact:
+    arch_kde_config_directory_path: '{{ arch_dev_user_result.home }}/.config'
+
+- name: Apply KDE global theme
+  # noqa: no-changed-when
+  ansible.builtin.command:
+    argv:
+      - plasma-apply-lookandfeel
+      - --platform
+      - offscreen
+      - --apply
+      - '{{ arch_kde_global_theme }}'
+
+- name: Set the keyboard keymap in KDE
+  community.general.kdeconfig:
+    path: '{{ arch_kde_config_directory_path }}/kxkbrc'
+    values:
+      - group: Layout
+        key: LayoutList
+        value: '{{ arch_kde_keymap }}'
+      - group: Layout
+        key: Use
+        bool_value: true
+    backup: true
+  register: arch_kde_keyboard_result
+
+- name: Restart plasmalogin if KDE config changed
+  ansible.builtin.service:
+    name: plasmalogin
+    state: restarted
+  when: '[ arch_kde_keyboard_result.changed ] is any'
