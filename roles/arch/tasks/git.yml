@@ -6,7 +6,7 @@
   loop:
     - '{{ arch_dev_user_result.home }}/.gitconfig'
 
-- name: Set repos directory
+- name: Set repos directory fact
   ansible.builtin.set_fact:
     arch_repos_directory_path: '{{ arch_dev_user_result.home }}/{{ arch_dev_user_home_directories.repos }}'
 
