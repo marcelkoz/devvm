@@ -56,6 +56,8 @@ arch_sudo_allowed_programs:
   - '{{ arch_sudo_allowed_programs_base_path }}/reboot'
   - '{{ arch_sudo_allowed_programs_base_path }}/shutdown'
   - '{{ arch_sudo_allowed_programs_base_path }}/systemctl'
+  - '{{ arch_sudo_allowed_programs_base_path }}/vmware-toolbox-cmd'
+  - '{{ arch_sudo_allowed_programs_base_path }}/vmware-user'
 
 arch_dev_user_name: marcel
 arch_dev_user_shell: /bin/bash
