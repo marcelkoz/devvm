@@ -40,6 +40,7 @@
     creates: '{{ arch_repos_directory_path }}/yay/pkg'
 
 - name: List yay packages
+  # noqa: no-changed-when
   ansible.builtin.command:
     argv:
       - makepkg
