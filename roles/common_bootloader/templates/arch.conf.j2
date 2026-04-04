@@ -3,4 +3,4 @@
 title    Arch Linux
 linux    /vmlinuz-linux
 initrd   /initramfs-linux.img
-options  root=UUID={{ bootstrap_root_partition_uuid_result.stdout }} rw
+options  root=UUID={{ common_bootloader_root_partition_uuid_result.stdout | mandatory }} rw

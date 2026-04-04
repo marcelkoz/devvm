@@ -1,0 +1,8 @@
+{{ ansible_managed | comment }}
+
+timeout {{ common_bootloader_timeout_in_seconds }}
+console-mode {{ common_bootloader_resolution }}
+
+default {{ common_bootloader_entries[0].name }}
+auto-reboot {{ common_bootloader_reboot_entry | string | lower }}
+auto-firmware {{ common_bootloader_firmware_entry | string | lower }}

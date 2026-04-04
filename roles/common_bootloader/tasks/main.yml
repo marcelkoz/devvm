@@ -1,0 +1,25 @@
+- name: Fetch root partition UUID
+  # noqa: no-changed-when
+  ansible.builtin.command: lsblk -dno UUID {{ common_bootloader_root_partition_path }}
+  register: common_bootloader_root_partition_uuid_result
+
+- name: Assert root partition UUID command succeeded
+  ansible.builtin.assert:
+    that: not common_bootloader_root_partition_uuid_result.failed
+
+- name: Root partition UUID
+  ansible.builtin.debug:
+    msg: '{{ common_bootloader_root_partition_uuid_result.stdout }}'
+
+- name: Template systemd-boot main config file
+  ansible.builtin.template:
+    src: 'templates/loader.conf.j2'
+    dest: '{{ common_bootloader_config_file_path }}'
+    mode: '{{ common_bootloader_file_permissions }}'
+
+- name: Template systemd-boot entries
+  ansible.builtin.template:
+    src: '{{ item.template }}'
+    dest: '{{ common_bootloader_entries_directory_path }}/{{ item.name }}'
+    mode: '{{ common_bootloader_file_permissions }}'
+  loop: '{{ common_bootloader_entries }}'

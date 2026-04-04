@@ -1,0 +1,14 @@
+common_bootloader_root_partition_path: /dev/sda2
+common_bootloader_boot_mount_point: /boot
+common_bootloader_entries_directory_path: '{{ common_bootloader_boot_mount_point }}/loader/entries'
+common_bootloader_config_file_path: '{{ common_bootloader_boot_mount_point }}/loader/loader.conf'
+common_bootloader_file_permissions: '0755'
+common_bootloader_entries:
+  - { template: 'templates/arch.conf.j2', name: 'arch.conf' }
+  - { template: 'templates/arch-shell.conf.j2', name: 'arch-shell.conf' }
+  - { template: 'templates/arch-fallback.conf.j2', name: 'arch-fallback.conf' }
+
+common_bootloader_timeout_in_seconds: 3
+common_bootloader_resolution: auto
+common_bootloader_reboot_entry: true
+common_bootloader_firmware_entry: true
