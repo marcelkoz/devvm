@@ -1,0 +1,6 @@
+- name: Update arch pacman mirrors
+  hosts: all
+  become: true
+
+  roles:
+    - common_mirrors
