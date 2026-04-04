@@ -23,14 +23,6 @@ bootstrap_mount_point:
   root: /mnt
   boot: /mnt/boot
 
-bootstrap_pacman_mirror_list_path: /etc/pacman.d/mirrorlist
-bootstrap_pacman_mirror_list_temp_path: '{{ bootstrap_temp_directory_path }}/mirrorlist'
-bootstrap_pacman_mirror_locations:
-  - United Kingdom
-  - France
-  - Germany
-  - Worldwide
-
 bootstrap_pacstrap_completion_path: '{{ bootstrap_temp_directory_path }}/pacstrap.complete'
 bootstrap_pacstrap_essential_packages:
   - base

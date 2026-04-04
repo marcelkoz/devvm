@@ -74,24 +74,11 @@
     fstype: '{{ bootstrap_partition_primary_disk.boot_partition_type }}'
     state: mounted
 
-- name: Filter pacman mirror list to the fastest ones
-  ansible.builtin.command:
-    argv:
-      - reflector
-      - --country={{ bootstrap_pacman_mirror_locations | join(',') }}
-      - --save={{ bootstrap_pacman_mirror_list_temp_path }}
-      - --sort=rate
-      - --fastest=20
-      - --protocol=https
-      - --threads=4
-    creates: '{{ bootstrap_pacman_mirror_list_temp_path }}'
-
-- name: Overwrite pacman mirror list
-  ansible.builtin.copy:
-    src: '{{ bootstrap_pacman_mirror_list_temp_path }}'
-    dest: '{{ bootstrap_pacman_mirror_list_path }}'
-    mode: '0644'
-    remote_src: true
+- name: Import common_mirrors role
+  ansible.builtin.include_role:
+    name: common_mirrors
+  vars:
+    common_mirrors_list_temp_path: '{{ bootstrap_temp_directory_path }}/mirrorlist'
 
 - name: Run pacstrap
   ansible.builtin.command: 'pacstrap -K {{ bootstrap_mount_point.root }} {{ bootstrap_pacstrap_essential_packages | join(" ") }}'
