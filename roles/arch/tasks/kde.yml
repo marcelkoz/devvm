@@ -42,3 +42,12 @@
     name: plasmalogin
     state: restarted
   when: '[ arch_kde_keyboard_result.changed ] is any'
+
+- name: Add applications to autostart
+  ansible.builtin.file:
+    src: '/usr/share/applications/{{ item }}'
+    dest: '{{ arch_kde_config_directory_path }}/autostart/{{ item }}'
+    state: link
+  loop:
+    - kitty.desktop
+    - org.kde.konsole.desktop
