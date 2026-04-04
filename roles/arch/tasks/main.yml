@@ -1,4 +1,8 @@
 ---
+- name: Import common_bootloader role
+  ansible.builtin.include_role:
+    name: common_bootloader
+
 - name: General configuration
   ansible.builtin.include_tasks: general.yml
 
