@@ -35,13 +35,8 @@
         key: Use
         bool_value: true
     backup: true
-  register: arch_kde_keyboard_result
-
-- name: Restart plasmalogin if KDE config changed
-  ansible.builtin.service:
-    name: plasmalogin
-    state: restarted
-  when: '[ arch_kde_keyboard_result.changed ] is any'
+  notify:
+    - Restart plasmalogin
 
 - name: Add applications to autostart
   ansible.builtin.file:

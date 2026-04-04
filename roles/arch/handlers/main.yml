@@ -1,0 +1,4 @@
+- name: Restart plasmalogin
+  ansible.builtin.service:
+    name: plasmalogin
+    state: restarted
