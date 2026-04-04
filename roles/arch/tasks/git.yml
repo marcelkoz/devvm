@@ -39,4 +39,10 @@
     chdir: '{{ arch_repos_directory_path }}/yay'
     creates: '{{ arch_repos_directory_path }}/yay/pkg'
 
-# TODO: yay install step
+- name: List yay packages
+  ansible.builtin.command:
+    argv:
+      - makepkg
+      - --packagelist
+    chdir: '{{ arch_repos_directory_path }}/yay'
+  register: arch_yay_package_list_result

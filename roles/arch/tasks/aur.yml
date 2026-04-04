@@ -1,0 +1,7 @@
+- name: Install yay package
+  ansible.builtin.pacman:
+    name: '{{ arch_yay_package_list_result.stdout_lines[0] }}'
+    state: present
+
+- name: Install AUR packages
+  ansible.builtin.command: yay --noconfirm -Syu {{ arch_aur_packages | join(" ") }}
