@@ -1,0 +1,7 @@
+common_mirrors_list_path: /etc/pacman.d/mirrorlist
+common_mirrors_list_temp_path: /tmp/mirrorlist
+common_mirrors_locations:
+  - United Kingdom
+  - France
+  - Germany
+  - Worldwide

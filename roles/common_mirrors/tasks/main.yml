@@ -1,0 +1,18 @@
+- name: Filter pacman mirror list to the fastest ones
+  ansible.builtin.command:
+    argv:
+      - reflector
+      - --country={{ common_mirrors_locations | join(',') }}
+      - --save={{ common_mirrors_list_temp_path }}
+      - --sort=rate
+      - --fastest=20
+      - --protocol=https
+      - --threads=4
+    creates: '{{ common_mirrors_list_temp_path }}'
+
+- name: Overwrite pacman mirror list
+  ansible.builtin.copy:
+    src: '{{ common_mirrors_list_temp_path }}'
+    dest: '{{ common_mirrors_list_path }}'
+    mode: '0644'
+    remote_src: true
