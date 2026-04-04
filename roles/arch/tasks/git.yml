@@ -28,3 +28,15 @@
       - --create-symlinks
       - --disable-safe-mode
       - '{{ arch_repos_directory_path }}/dotfiles'
+
+- name: Build yay AUR package
+  ansible.builtin.command:
+    argv:
+      - makepkg
+      - -sf
+      - --needed
+      - --noconfirm
+    chdir: '{{ arch_repos_directory_path }}/yay'
+    creates: '{{ arch_repos_directory_path }}/yay/pkg'
+
+# TODO: yay install step

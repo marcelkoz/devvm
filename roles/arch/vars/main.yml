@@ -67,6 +67,7 @@ arch_dev_user_groups:
 
 arch_dev_user_git_repos:
   dotfiles: https://github.com/marcelkoz/dotfiles
+  yay: https://aur.archlinux.org/yay.git
 
 arch_dev_user_home_directories:
   repos: Repos
