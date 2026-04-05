@@ -7,6 +7,7 @@ arch_packages:
     - bash-completion
     - chromium
     - code
+    - firefox
     - gtkmm3 # vmware clipboard sharing
     - less
     - open-vm-tools
