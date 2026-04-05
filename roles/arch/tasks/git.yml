@@ -19,6 +19,7 @@
   loop: '{{ arch_dev_user_git_repos | dict2items }}'
   register: arch_dev_user_repos_result
 
+# TODO: make this indempotent
 - name: Run dotfiles script
   # noqa: no-changed-when
   ansible.builtin.command:
@@ -39,6 +40,7 @@
     chdir: '{{ arch_repos_directory_path }}/yay'
     creates: '{{ arch_repos_directory_path }}/yay/pkg'
 
+# TODO: make this indempotent
 - name: List yay packages
   # noqa: no-changed-when
   ansible.builtin.command:

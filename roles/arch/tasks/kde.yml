@@ -14,6 +14,7 @@
   ansible.builtin.set_fact:
     arch_kde_config_directory_path: '{{ arch_dev_user_result.home }}/.config'
 
+# TODO: make this indempotent
 - name: Apply KDE global theme
   # noqa: no-changed-when
   ansible.builtin.command:

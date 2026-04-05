@@ -1,3 +1,4 @@
+# TODO: make this indempotent
 - name: Fetch root partition UUID
   # noqa: no-changed-when
   ansible.builtin.command: lsblk -dno UUID {{ common_bootloader_root_partition_path }}
