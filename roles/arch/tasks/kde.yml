@@ -44,5 +44,6 @@
     dest: '{{ arch_kde_config_directory_path }}/autostart/{{ item }}'
     state: link
   loop:
+    - code.desktop
     - kitty.desktop
     - org.kde.konsole.desktop
