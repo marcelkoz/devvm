@@ -25,6 +25,7 @@ arch_packages:
     - nano
     - packer
     - rclone
+    - talosctl
     - terraform
     - vim
 
