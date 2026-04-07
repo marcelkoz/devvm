@@ -5,9 +5,7 @@ arch_packages:
     - base-devel
     - bash
     - bash-completion
-    - chromium
-    - code
-    - firefox
+    - curl
     - gtkmm3 # vmware clipboard sharing
     - less
     - open-vm-tools
@@ -22,6 +20,7 @@ arch_packages:
     - docker
     - docker-compose
     - git
+    - kubectl
     - nano
     - packer
     - rclone
@@ -41,6 +40,9 @@ arch_packages:
     - python
 
   graphical:
+    - chromium
+    - code
+    - firefox
     - kde-graphics-meta
     - kde-system-meta
     - kde-utilities-meta
