@@ -20,6 +20,7 @@ arch_packages:
     - docker
     - docker-compose
     - git
+    - helm
     - kubectl
     - nano
     - packer
