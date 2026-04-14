@@ -58,3 +58,5 @@
       - --packagelist
     chdir: '{{ arch_repos_directory_path }}/yay'
   register: arch_yay_package_list_result
+  tags:
+    - aur
