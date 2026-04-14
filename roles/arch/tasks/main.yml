@@ -14,6 +14,8 @@
 
 - name: AUR configuration
   ansible.builtin.include_tasks: aur.yml
+  tags:
+    - aur
 
 - name: KDE configuration
   ansible.builtin.include_tasks: kde.yml
