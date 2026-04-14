@@ -80,6 +80,7 @@ arch_dev_user_git_repos:
 
 arch_dev_user_home_directories:
   repos: Repos
+  third_party_repos: ThirdPartyRepos
   desktop: Desktop
   downloads: Downloads
   documents: Documents
