@@ -6,11 +6,12 @@
   loop:
     - '{{ arch_dev_user_result.home }}/.gitconfig'
 
-- name: Set repos directory fact
+- name: Set repo directories fact
   ansible.builtin.set_fact:
     arch_repos_directory_path: '{{ arch_dev_user_result.home }}/{{ arch_dev_user_home_directories.repos }}'
+    arch_third_party_repos_directory_path: '{{ arch_dev_user_result.home }}/{{ arch_dev_user_home_directories.third_party_repos }}'
 
-- name: Clone repos to dev user
+- name: Clone personal repos to dev user home
   # noqa: latest
   ansible.builtin.git:
     repo: '{{ item.value }}'
@@ -18,6 +19,15 @@
     clone: true
   loop: '{{ arch_dev_user_git_repos | dict2items }}'
   register: arch_dev_user_repos_result
+
+- name: Clone third party repos to dev user home
+  # noqa: latest
+  ansible.builtin.git:
+    repo: '{{ item.value }}'
+    dest: '{{ arch_third_party_repos_directory_path }}/{{ item.key }}'
+    clone: true
+  loop: '{{ arch_dev_user_third_party_git_repos | dict2items }}'
+  register: arch_dev_user_third_party_repos_result
 
 # TODO: make this indempotent
 - name: Run dotfiles script
