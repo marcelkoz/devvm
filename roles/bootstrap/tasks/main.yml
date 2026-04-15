@@ -134,6 +134,15 @@
     path: '{{ bootstrap_chroot_script_path_live }}'
     state: absent
 
+- name: Copy authorised ssh keys to the arch-chroot environment
+  ansible.builtin.copy:
+    src: /root/.ssh/authorized_keys
+    dest: '{{ bootstrap_mount_point.root }}/root/.ssh/authorized_keys'
+    remote_src: true
+    mode: '0600'
+    owner: root
+    group: root
+
 - name: Import common_bootloader role
   ansible.builtin.include_role:
     name: common_bootloader
