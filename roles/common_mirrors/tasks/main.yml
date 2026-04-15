@@ -1,6 +1,7 @@
 - name: Install reflector package
   community.general.pacman:
     name: reflector
+    update_cache: true
     state: present
 
 - name: Filter pacman mirror list to the fastest ones
