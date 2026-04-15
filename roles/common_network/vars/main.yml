@@ -1,4 +1,9 @@
 common_network_interface_config_directory_path: /etc/systemd/network
+common_network_ssh_config_directory_path: /etc/ssh/sshd_config.d
+common_network_ssh_config_pubkey_auth: 'yes'
+common_network_ssh_config_password_auth: 'yes'
+common_network_ssh_config_empty_passwords: 'no'
+common_network_ssh_config_permit_root: 'prohibit-password'
 common_network_resolv_symlink_source_path: ../run/systemd/resolve/stub-resolv.conf
 common_network_resolv_symlink_destination_path: /etc/resolv.conf
 common_network_wired_dhcp: true

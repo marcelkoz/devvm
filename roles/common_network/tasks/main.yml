@@ -12,11 +12,18 @@
     follow: false
     state: link
 
+- name: Template ssh config file
+  ansible.builtin.template:
+    src: templates/xx-ssh.conf.j2
+    dest: '{{ common_network_ssh_config_directory_path }}/50-ssh.conf'
+    mode: '0444'
+
 - name: Enable and start networking services
   ansible.builtin.service:
     name: '{{ item }}'
     enabled: true
     state: started
   loop:
+    - sshd
     - systemd-networkd
     - systemd-resolved

@@ -156,3 +156,4 @@
   vars:
     common_network_interface_config_directory_path: '{{ bootstrap_mount_point.root }}/etc/systemd/network'
     common_network_resolv_symlink_destination_path: '{{ bootstrap_mount_point.root }}/etc/resolv.conf'
+    common_network_ssh_config_directory_path: '{{ bootstrap_mount_point.root }}/etc/ssh/sshd_config.d'

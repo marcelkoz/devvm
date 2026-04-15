@@ -1,0 +1,6 @@
+{{ ansible_managed | comment }}
+
+PubkeyAuthentication {{ common_network_ssh_config_pubkey_auth }}
+PasswordAuthentication {{ common_network_ssh_config_password_auth }}
+PermitEmptyPasswords {{ common_network_ssh_config_empty_passwords }}
+PermitRootLogin {{ common_network_ssh_config_permit_root }}
