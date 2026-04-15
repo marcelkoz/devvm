@@ -39,6 +39,11 @@
   notify:
     - Restart plasmalogin
 
+- name: Create autostart directory
+  ansible.builtin.file:
+    path: '{{ arch_kde_config_directory_path }}/autostart'
+    state: directory
+
 - name: Add applications to autostart
   ansible.builtin.file:
     src: '/usr/share/applications/{{ item }}'
