@@ -2,3 +2,13 @@
   ansible.builtin.service:
     name: plasmalogin
     state: restarted
+
+- name: Run dotfiles script
+  # noqa: no-changed-when
+  ansible.builtin.command:
+    argv:
+      - python
+      - '{{ arch_repos_directory_path }}/dotfiles/dotfiles.py'
+      - --create-symlinks
+      - --disable-safe-mode
+      - '{{ arch_repos_directory_path }}/dotfiles'

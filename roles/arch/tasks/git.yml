@@ -27,17 +27,8 @@
     dest: '{{ arch_third_party_repos_directory_path }}/{{ item.key }}'
     clone: true
   loop: '{{ arch_dev_user_third_party_git_repos | dict2items }}'
-  register: arch_dev_user_third_party_repos_result
-
-- name: Run dotfiles script
-  ansible.builtin.command:
-    argv:
-      - python
-      - '{{ arch_repos_directory_path }}/dotfiles/dotfiles.py'
-      - --create-symlinks
-      - --disable-safe-mode
-      - '{{ arch_repos_directory_path }}/dotfiles'
-  when: arch_dev_user_repos_result.changed
+  notify:
+    - Run dotfiles script
 
 - name: Build yay AUR package
   ansible.builtin.command:
