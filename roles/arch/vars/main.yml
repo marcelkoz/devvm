@@ -22,14 +22,16 @@ arch_packages:
     - docker
     - docker-compose
     - git
-    - helm
-    - kubectl
     - nano
     - packer
     - rclone
-    - talosctl
     - terraform
     - vim
+
+  kubernetes:
+    - helm
+    - kubectl
+    - talosctl
 
   networking:
     - bind
