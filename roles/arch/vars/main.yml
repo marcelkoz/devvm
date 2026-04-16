@@ -16,6 +16,8 @@ arch_packages:
     - zip
 
   tools:
+    - ansible
+    - ansible-core
     - azure-cli
     - docker
     - docker-compose
