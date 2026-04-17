@@ -1,4 +1,3 @@
-
 - name: Set vscode config directory fact
   ansible.builtin.set_fact:
     arch_vscode_config_directory_path: '{{ arch_dev_user_result.home }}/.config/Code - OSS'

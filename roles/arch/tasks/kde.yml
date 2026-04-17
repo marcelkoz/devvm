@@ -42,6 +42,8 @@
 - name: Create autostart directory
   ansible.builtin.file:
     path: '{{ arch_kde_config_directory_path }}/autostart'
+    owner: '{{ arch_dev_user_name }}'
+    group: '{{ arch_dev_user_name }}'
     state: directory
 
 - name: Add applications to autostart
