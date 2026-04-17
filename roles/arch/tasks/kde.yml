@@ -39,6 +39,22 @@
   notify:
     - Restart plasmalogin
 
+- name: Set the power settings in KDE
+  community.general.kdeconfig:
+    path: '{{ arch_kde_config_directory_path }}/powerdevilrc'
+    values:
+      - groups: [AC, Display]
+        key: '{{ item[0] }}'
+        value: '{{ item[1] }}'
+    backup: true
+  loop:
+    - [DimDisplayWhenIdle, '{{ arch_kde_power_dim.idle }}']
+    - [DimDisplayIdleTimeoutSec, '{{ arch_kde_power_dim.timeout_seconds }}']
+    - [TurnOffDisplayWhenIdle, '{{ arch_kde_power_turn_off.idle }}']
+    - [TurnOffDisplayIdleTimeoutSec, '{{ arch_kde_power_turn_off.timeout_seconds }}']
+  notify:
+    - Restart plasmalogin
+
 - name: Create autostart directory
   ansible.builtin.file:
     path: '{{ arch_kde_config_directory_path }}/autostart'
