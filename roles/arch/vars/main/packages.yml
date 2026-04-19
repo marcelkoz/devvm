@@ -44,6 +44,7 @@ arch_packages:
     - pyenv
     - python
     - python-pip
+    - rustup
 
   graphical:
     - chromium
