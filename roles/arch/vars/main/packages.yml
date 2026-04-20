@@ -41,10 +41,12 @@ arch_packages:
 
   languages:
     - go
-    - pyenv
+    - nvm # node
+    - pyenv # python
     - python
+    - python-black
     - python-pip
-    - rustup
+    - rustup # rust
 
   graphical:
     - chromium

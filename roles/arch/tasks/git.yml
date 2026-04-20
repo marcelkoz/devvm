@@ -19,6 +19,10 @@
     clone: true
   loop: '{{ arch_dev_user_git_repos | dict2items }}'
   register: arch_dev_user_repos_result
+  # later tasks modify the dotfiles
+  failed_when:
+    - arch_dev_user_repos_result.failed
+    - not 'Local modifications exist in the destination' in arch_dev_user_repos_result.msg
 
 - name: Clone third party repos to dev user home
   # noqa: latest

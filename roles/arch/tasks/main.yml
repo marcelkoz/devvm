@@ -23,8 +23,8 @@
     apply:
       become_user: '{{ arch_dev_user_name }}'
 
-- name: VSCode configuration
-  ansible.builtin.include_tasks: vscode.yml
+- name: Development configuration
+  ansible.builtin.include_tasks: dev.yml
   args:
     apply:
       become_user: '{{ arch_dev_user_name }}'
