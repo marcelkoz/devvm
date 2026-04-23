@@ -3,6 +3,22 @@
     src: templates/xx-wired.network.j2
     dest: '{{ common_network_interface_config_directory_path }}/20-wired.network'
     mode: '0444'
+  notify:
+    - Restart systemd-networkd
+
+- name: Create dns resolve config directory
+  ansible.builtin.file:
+    path: '{{ common_network_dns_config_directory_path }}'
+    mode: '0755'
+    state: directory
+
+- name: Template dns resolve config files
+  ansible.builtin.template:
+    src: templates/xx-dns.conf.j2
+    dest: '{{ common_network_dns_config_directory_path }}/00-dns.conf'
+    mode: '0444'
+  notify:
+    - Restart systemd-resolved
 
 - name: Symlink resolv.conf file
   ansible.builtin.file:
@@ -17,6 +33,8 @@
     src: templates/xx-ssh.conf.j2
     dest: '{{ common_network_ssh_config_directory_path }}/50-ssh.conf'
     mode: '0444'
+  notify:
+    - Restart sshd
 
 - name: Enable and start networking services
   ansible.builtin.service:

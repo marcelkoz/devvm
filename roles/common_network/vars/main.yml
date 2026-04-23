@@ -6,6 +6,11 @@ common_network_ssh_config_empty_passwords: 'no'
 common_network_ssh_config_permit_root: 'prohibit-password'
 common_network_resolv_symlink_source_path: ../run/systemd/resolve/stub-resolv.conf
 common_network_resolv_symlink_destination_path: /etc/resolv.conf
+common_network_dns_config_directory_path: /etc/systemd/resolved.conf.d
+common_network_dns_servers:
+  - 172.16.20.1
+  - 1.1.1.1
+  - 8.8.8.8
 common_network_wired_dhcp: true
 common_network_wired_interfaces:
   - en*

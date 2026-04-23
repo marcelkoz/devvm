@@ -1,0 +1,6 @@
+{{ ansible_managed | comment }}
+
+[Resolve]
+DNS={{ common_network_dns_servers | join (' ') }}
+FallbackDNS={{ common_network_dns_servers | join (' ') }}
+Domains=~.
