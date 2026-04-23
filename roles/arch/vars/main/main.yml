@@ -8,7 +8,9 @@ arch_sudo_allowed_programs:
   - '{{ arch_sudo_allowed_programs_base_path }}/pacman'
   - '{{ arch_sudo_allowed_programs_base_path }}/reboot'
   - '{{ arch_sudo_allowed_programs_base_path }}/shutdown'
+  - '{{ arch_sudo_allowed_programs_base_path }}/sudoedit'
   - '{{ arch_sudo_allowed_programs_base_path }}/systemctl'
+  - '{{ arch_sudo_allowed_programs_base_path }}/trivy'
   - '{{ arch_sudo_allowed_programs_base_path }}/vmware-toolbox-cmd'
   - '{{ arch_sudo_allowed_programs_base_path }}/vmware-user'
 
