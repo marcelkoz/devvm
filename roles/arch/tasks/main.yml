@@ -3,6 +3,10 @@
   ansible.builtin.include_role:
     name: common_bootloader
 
+- name: Import common_network role
+  ansible.builtin.include_role:
+    name: common_network
+
 - name: General configuration
   ansible.builtin.include_tasks: general.yml
 
