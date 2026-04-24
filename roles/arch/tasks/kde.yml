@@ -14,9 +14,13 @@
   ansible.builtin.set_fact:
     arch_kde_config_directory_path: '{{ arch_dev_user_result.home }}/.config'
 
-# TODO: make this indempotent
+- name: Get current KDE global theme
+  ansible.builtin.command: kreadconfig6 --group KDE --key LookAndFeelPackage
+  register: arch_current_kde_theme_result
+  changed_when: false
+  failed_when: arch_current_kde_theme_result.rc != 0
+
 - name: Apply KDE global theme
-  # noqa: no-changed-when
   ansible.builtin.command:
     argv:
       - plasma-apply-lookandfeel
@@ -24,6 +28,8 @@
       - offscreen
       - --apply
       - '{{ arch_kde_global_theme }}'
+  changed_when: true
+  when: arch_current_kde_theme_result.stdout != arch_kde_global_theme
 
 - name: Set the keyboard keymap in KDE
   community.general.kdeconfig:
