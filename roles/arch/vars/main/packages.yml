@@ -8,6 +8,7 @@ arch_packages:
     - less
     - open-vm-tools
     - openssh
+    - ripgrep
     - tree
     - ttf-fira-code
     - unzip
