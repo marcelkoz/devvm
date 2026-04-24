@@ -33,25 +33,3 @@
   loop: '{{ arch_dev_user_third_party_git_repos | dict2items }}'
   notify:
     - Run dotfiles script
-
-- name: Build yay AUR package
-  ansible.builtin.command:
-    argv:
-      - makepkg
-      - -sf
-      - --needed
-      - --noconfirm
-    chdir: '{{ arch_third_party_repos_directory_path }}/yay'
-    creates: '{{ arch_third_party_repos_directory_path }}/yay/pkg'
-
-# TODO: make this indempotent
-- name: List yay packages
-  # noqa: no-changed-when
-  ansible.builtin.command:
-    argv:
-      - makepkg
-      - --packagelist
-    chdir: '{{ arch_third_party_repos_directory_path }}/yay'
-  register: arch_yay_package_list_result
-  tags:
-    - aur
