@@ -5,6 +5,7 @@ arch_packages:
     - bash-completion
     - curl
     - gtkmm3 # vmware clipboard sharing
+    - jq
     - less
     - open-vm-tools
     - openssh
@@ -49,6 +50,9 @@ arch_packages:
     - python-black
     - python-pip
     - rustup # rust
+
+  llm:
+    - gemini-cli
 
   graphical:
     - chromium
