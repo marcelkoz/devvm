@@ -36,7 +36,7 @@ ansible-playbook $ANSIBLE_ARGS site.yml --tags bootstrap
 ```
 
 
-#### Phase 2: Arch
+### Phase 2: Arch
 
 Once the Arch linux system has been bootstrapped and rebooted, it should be ready for phase 2. The `bootstrap` phase retains the ssh public key provided for phase 1 so the only detail to change is the `hosts.yml` file with the updated IP address of the system. Once that is done, run the ansible playbooks.
 
@@ -45,7 +45,7 @@ ANSIBLE_ARGS='-i hosts.yml'
 ansible-playbook $ANSIBLE_ARGS site.yml --tags arch
 ```
 
-Alternatively, the playbooks can be run without installing [AUR](https://aur.archlinux.org) packages.
+Alternatively, the playbooks can be run without installing [AUR](https://aur.archlinux.org) packages. Note this still fetches the yay git repository but no packages are installed (including yay).
 
 ```bash
 ansible-playbook $ANSIBLE_ARGS site.yml --tags arch --skip-tags aur
