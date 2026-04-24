@@ -27,7 +27,20 @@
     name: '{{ arch_yay_package_list_result.stdout_lines[0] }}'
     state: present
 
-# TODO: make this indempotent
+- name: Check AUR package status
+  ansible.builtin.command: yay -T {{ arch_aur_packages | join(' ') }}
+  register: arch_aur_packages_status_result
+  changed_when: false
+  failed_when: false
+  become: true
+  become_user: '{{ arch_dev_user_name }}'
+  when: arch_aur_packages | length > 0
+
 - name: Install AUR packages
-  # noqa: no-changed-when
-  ansible.builtin.command: yay --noconfirm -Syu {{ arch_aur_packages | join(" ") }}
+  ansible.builtin.command: yay --noconfirm -Syu {{ arch_aur_packages | join(' ') }}
+  become: true
+  become_user: '{{ arch_dev_user_name }}'
+  changed_when: true
+  when:
+    - arch_aur_packages | length > 0
+    - arch_aur_packages_status_result.stdout != ""
