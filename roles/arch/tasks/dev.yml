@@ -11,7 +11,6 @@
 - name: Add nvm to shell environment files
   ansible.builtin.blockinfile:
     path: '{{ arch_dev_user_result.home }}/.bashenv'
-    marker: '#### ANSIBLE CONFIGURATION ####'
     append_newline: true
     prepend_newline: true
     block: '. /usr/share/nvm/init-nvm.sh'
