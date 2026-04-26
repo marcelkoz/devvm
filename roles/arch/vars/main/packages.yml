@@ -32,6 +32,7 @@ arch_packages:
     - vim
 
   kubernetes:
+    - argocd
     - helm
     - kubectl
     - talosctl
