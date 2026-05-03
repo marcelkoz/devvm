@@ -50,6 +50,7 @@ arch_packages:
     - python
     - python-black
     - python-pip
+    - ruff # python
     - rustup # rust
 
   llm:
