@@ -6,6 +6,7 @@
 - name: Check specified packages are installed
   community.general.pacman:
     name: '{{ item.value }}'
+    update_cache: true
     state: present
   loop: '{{ arch_packages | dict2items }}'
 
