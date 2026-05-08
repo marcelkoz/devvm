@@ -39,5 +39,6 @@
     enabled: true
     state: started
   loop:
+    - docker
     - plasmalogin
     - vmtoolsd
