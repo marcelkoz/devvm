@@ -33,6 +33,8 @@ arch_dev_user_home_directories:
   documents: Documents
   scratch: Scratch
 
+arch_dev_php_config_file_path: /etc/php/php.ini
+
 arch_git_user_name: Marcel Kozlowski
 arch_git_user_email: 37003922+marcelkoz@users.noreply.github.com
 

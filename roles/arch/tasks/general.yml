@@ -42,3 +42,13 @@
     - docker
     - plasmalogin
     - vmtoolsd
+
+# TODO: make this a file in the config dir
+- name: Enable PHP sqlite extension
+  ansible.builtin.blockinfile:
+    path: '{{ arch_dev_php_config_file_path }}'
+    append_newline: true
+    prepend_newline: true
+    backup: true
+    marker: '; {mark} ANSIBLE MANAGED BLOCK'
+    block: 'extension=pdo_sqlite'

@@ -10,6 +10,7 @@ arch_packages:
     - open-vm-tools
     - openssh
     - ripgrep
+    - sqlite
     - tree
     - ttf-fira-code
     - unzip
@@ -44,8 +45,11 @@ arch_packages:
     - whois
 
   languages:
+    - composer # php
     - go
     - nvm # node
+    - php
+    - php-sqlite
     - pyenv # python
     - python
     - python-black
