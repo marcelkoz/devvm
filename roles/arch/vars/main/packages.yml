@@ -43,6 +43,7 @@ arch_packages:
     - iproute2
     - iputils
     - whois
+    - wireshark-qt
 
   languages:
     - composer # php
