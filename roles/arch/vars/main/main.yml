@@ -2,17 +2,6 @@ arch_timezone: 'Europe/London'
 
 arch_sudo_config_directory_path: /etc/sudoers.d
 arch_sudo_group: wheel
-arch_sudo_allowed_programs_base_path: /usr/bin
-arch_sudo_allowed_programs:
-  - '{{ arch_sudo_allowed_programs_base_path }}/docker'
-  - '{{ arch_sudo_allowed_programs_base_path }}/pacman'
-  - '{{ arch_sudo_allowed_programs_base_path }}/reboot'
-  - '{{ arch_sudo_allowed_programs_base_path }}/shutdown'
-  - '{{ arch_sudo_allowed_programs_base_path }}/sudoedit'
-  - '{{ arch_sudo_allowed_programs_base_path }}/systemctl'
-  - '{{ arch_sudo_allowed_programs_base_path }}/trivy'
-  - '{{ arch_sudo_allowed_programs_base_path }}/vmware-toolbox-cmd'
-  - '{{ arch_sudo_allowed_programs_base_path }}/vmware-user'
 
 arch_dev_user_name: marcel
 arch_dev_user_shell: /bin/bash
