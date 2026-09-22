@@ -35,6 +35,7 @@ arch_packages:
   kubernetes:
     - argocd
     - helm
+    - helmfile
     - kubectl
     - talosctl
 
