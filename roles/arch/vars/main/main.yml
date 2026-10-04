@@ -26,6 +26,7 @@ arch_dev_php_config_file_path: /etc/php/php.ini
 
 arch_git_user_name: Marcel Kozlowski
 arch_git_user_email: 37003922+marcelkoz@users.noreply.github.com
+arch_git_default_branch_name: main
 
 arch_kde_global_theme: org.kde.breezedark.desktop
 arch_kde_keymap: gb

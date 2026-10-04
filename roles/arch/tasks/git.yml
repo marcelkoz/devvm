@@ -33,3 +33,9 @@
   loop: '{{ arch_dev_user_third_party_git_repos | dict2items }}'
   notify:
     - Run dotfiles script
+
+- name: Set default branch name
+  community.general.git_config:
+    name: init.defaultBranch
+    scope: global
+    value: '{{ arch_git_default_branch_name }}'
