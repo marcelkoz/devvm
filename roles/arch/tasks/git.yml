@@ -1,11 +1,3 @@
-- name: Template git config
-  ansible.builtin.template:
-    src: 'templates/gitconfig.j2'
-    dest: '{{ item }}'
-    mode: '0644'
-  loop:
-    - '{{ arch_dev_user_result.home }}/.gitconfig'
-
 - name: Set repo directories fact
   ansible.builtin.set_fact:
     arch_repos_directory_path: '{{ arch_dev_user_result.home }}/{{ arch_dev_user_home_directories.repos }}'
@@ -34,7 +26,19 @@
   notify:
     - Run dotfiles script
 
-- name: Set default branch name
+- name: Set name in git config
+  community.general.git_config:
+    name: user.name
+    scope: global
+    value: '{{ arch_git_user_name }}'
+
+- name: Set email in git config
+  community.general.git_config:
+    name: user.email
+    scope: global
+    value: '{{ arch_git_user_email }}'
+
+- name: Set default branch name in git config
   community.general.git_config:
     name: init.defaultBranch
     scope: global
