@@ -14,3 +14,18 @@
     append_newline: true
     prepend_newline: true
     block: '. /usr/share/nvm/init-nvm.sh'
+
+- name: Clone AI skills repositories
+  # noqa: latest
+  ansible.builtin.git:
+    repo: '{{ item.value }}'
+    dest: '{{ arch_third_party_repos_directory_path }}/{{ item.key }}'
+    clone: true
+  loop: '{{ arch_global_ai_skills_repos | dict2items }}'
+
+- name: Copy AI skills files
+  ansible.builtin.copy:
+    src: '{{ arch_third_party_repos_directory_path }}/{{ item.key }}/skills/'
+    dest: '{{ arch_dev_user_result.home }}/.agents/skills/'
+    force: true
+  loop: '{{ arch_global_ai_skills_repos | dict2items }}'

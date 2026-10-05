@@ -37,3 +37,7 @@ arch_kde_power_dim:
 arch_kde_power_turn_off:
   idle: false
   timeout_seconds: -1
+
+arch_global_ai_skills_repos:
+  ponytail: https://github.com/DietrichGebert/ponytail
+  caveman: https://github.com/JuliusBrussee/caveman
