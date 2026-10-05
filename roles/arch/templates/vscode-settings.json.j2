@@ -13,5 +13,10 @@
     },
     "redhat.telemetry.enabled": false,
     "ansible.lightspeed.enabled": false,
-    "docker.extension.enableComposeLanguageServer": false
+    "github.copilot.enable": {
+{% for file_type in arch_vscode_config_disable_copilot_file_types %}
+        "{{ file_type }}": false{% if not loop.last %},{% endif %}
+
+{% endfor %}
+    }
 }
