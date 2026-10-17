@@ -5,6 +5,7 @@ arch_packages:
     - bash-completion
     - curl
     - flatpak
+    - fuse # appimages
     - gtkmm3 # vmware clipboard sharing
     - jq
     - less
