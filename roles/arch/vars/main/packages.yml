@@ -81,7 +81,8 @@ arch_packages_absent:
   - visual-studio-code-bin
 
 arch_flatpak_packages:
-  flathub: []
+  flathub:
+    - com.usebruno.Bruno
 
 arch_flatpak_packages_absent:
   flathub: []
