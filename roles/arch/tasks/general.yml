@@ -1,14 +1,28 @@
-- name: Uninstall specified packages
+- name: Uninstall specified pacman packages
   community.general.pacman:
     name: '{{ arch_packages_absent }}'
     state: absent
 
-- name: Check specified packages are installed
+- name: Check specified pacman packages are installed
   community.general.pacman:
     name: '{{ item.value }}'
     update_cache: true
     state: present
   loop: '{{ arch_packages | dict2items }}'
+
+- name: Uninstall specified flatpak packages
+  community.general.flatpak:
+    name: '{{ item.value }}'
+    remote: '{{ item.key }}'
+    state: absent
+  loop: '{{ arch_flatpak_packages_absent | dict2items }}'
+
+- name: Check specified flatpak packages are installed
+  community.general.flatpak:
+    name: '{{ item.value }}'
+    remote: '{{ item.key }}'
+    state: present
+  loop: '{{ arch_flatpak_packages | dict2items }}'
 
 - name: Template sudoers config
   ansible.builtin.template:

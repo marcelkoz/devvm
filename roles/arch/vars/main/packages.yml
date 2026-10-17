@@ -4,6 +4,7 @@ arch_packages:
     - bash
     - bash-completion
     - curl
+    - flatpak
     - gtkmm3 # vmware clipboard sharing
     - jq
     - less
@@ -78,3 +79,9 @@ arch_aur_packages: []
 arch_packages_absent:
   - google-chrome
   - visual-studio-code-bin
+
+arch_flatpak_packages:
+  flathub: []
+
+arch_flatpak_packages_absent:
+  flathub: []
