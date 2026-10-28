@@ -7,6 +7,7 @@ arch_dev_user_name: marcel
 arch_dev_user_shell: /bin/bash
 arch_dev_user_groups:
   - '{{ arch_sudo_group }}'
+  - wireshark
 
 arch_dev_user_git_repos:
   dotfiles: https://github.com/marcelkoz/dotfiles
