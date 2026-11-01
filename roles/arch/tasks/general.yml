@@ -26,9 +26,12 @@
 
 - name: Template sudoers config
   ansible.builtin.template:
-    src: 'templates/xx-wheel.j2'
-    dest: '{{ arch_sudo_config_directory_path }}/10-wheel'
+    src: 'templates/{{ item.src }}'
+    dest: '{{ arch_sudo_config_directory_path }}/{{ item.dest }}'
     mode: '0440'
+  loop:
+    - { src: xx-sudo-wheel.j2, dest: 10-wheel }
+    - { src: xx-sudo-prompt.j2, dest: 20-prompt }
 
 - name: Add dev user
   ansible.builtin.user:

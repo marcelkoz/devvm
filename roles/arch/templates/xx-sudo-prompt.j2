@@ -1,0 +1,5 @@
+{{ ansible_managed | comment }}
+
+{% if arch_sudo_password_feedback %}
+Defaults pwfeedback
+{% endif %}
