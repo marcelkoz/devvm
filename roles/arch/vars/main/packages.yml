@@ -9,6 +9,8 @@ arch_packages:
     - gtkmm3 # vmware clipboard sharing
     - jq
     - less
+    - man-db
+    - man-pages
     - open-vm-tools
     - openssh
     - ripgrep
