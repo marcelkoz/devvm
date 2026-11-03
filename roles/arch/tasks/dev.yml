@@ -23,12 +23,20 @@
     clone: true
   loop: '{{ arch_global_ai_skills_repos | dict2items }}'
 
-- name: Copy AI skills files
-  ansible.builtin.copy:
-    src: '{{ arch_third_party_repos_directory_path }}/{{ item.key }}/skills/'
-    dest: '{{ arch_dev_user_result.home }}/.agents/skills/'
-    force: true
+- name: Find all AI skills directories
+  ansible.builtin.find:
+    paths: '{{ arch_third_party_repos_directory_path }}/{{ item.key }}/skills'
+    file_type: directory
+    recurse: false
   loop: '{{ arch_global_ai_skills_repos | dict2items }}'
+  register: arch_ai_skills_directories
+
+- name: Symlink the AI skills directories
+  ansible.builtin.file:
+    src: '{{ item }}'
+    dest: '{{ arch_dev_user_result.home }}/.agents/skills/{{ item | basename }}'
+    state: link
+  loop: '{{ arch_ai_skills_directories.results | map(attribute="files") | flatten | map(attribute="path") }}'
 
 - name: Template opencode configuration
   ansible.builtin.template:
