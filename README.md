@@ -17,7 +17,7 @@ Two-phase deployment:
 ### Core Playbooks
 
 - **`site.yml`**: Master playbook orchestrating deployment via tags.
-- **`mirrors.yml`**: Pacman mirror selection (runs automatically during bootstrap).
+- **`pb_update_mirrors.yml`**: Pacman mirror selection (runs automatically during bootstrap).
 
 
 ### Phase 1: Bootstrap
