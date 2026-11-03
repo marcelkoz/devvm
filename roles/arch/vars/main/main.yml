@@ -43,3 +43,20 @@ arch_kde_power_turn_off:
 arch_global_ai_skills_repos:
   ponytail: https://github.com/DietrichGebert/ponytail
   caveman: https://github.com/JuliusBrussee/caveman
+
+arch_opencode_config_directory_path: ~/.config/opencode
+arch_opencode_config_file_path: '{{ arch_opencode_config_directory_path }}/opencode.jsonc'
+arch_opencode_config_formatter: true
+arch_opencode_config_permissions:
+  read:
+    - resource: '**/.ssh/**'
+      effect: deny
+  shell:
+    - resource: '*'
+      effect: ask
+    - resource: git status *
+      effect: allow
+    - resource: git push *
+      effect: deny
+    - resource: rm -rf *
+      effect: deny
