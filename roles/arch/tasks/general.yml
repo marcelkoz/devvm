@@ -17,6 +17,12 @@
     state: absent
   loop: '{{ arch_flatpak_packages_absent | dict2items }}'
 
+- name: Add flatpak remotes
+  community.general.flatpak_remote:
+    name: '{{ item }}'
+    state: present
+  loop: '{{ arch_flatpak_packages.keys() }}'
+
 - name: Check specified flatpak packages are installed
   community.general.flatpak:
     name: '{{ item.value }}'
