@@ -1,3 +1,12 @@
+- name: Create vscode configuration directories
+  ansible.builtin.file:
+    path: '{{ item }}'
+    mode: '0755'
+    state: directory
+  loop:
+    - '{{ arch_vscode_config_directory_path }}'
+    - '{{ arch_vscode_config_directory_path }}/User'
+
 - name: Template vscode settings file
   ansible.builtin.template:
     src: 'templates/vscode-settings.json.j2'
@@ -39,6 +48,12 @@
     dest: '{{ arch_dev_user_home_path }}/.agents/skills/{{ item | basename }}'
     state: link
   loop: '{{ arch_ai_skills_directories.results | map(attribute="files") | flatten | map(attribute="path") }}'
+
+- name: Create opencode configuration directory
+  ansible.builtin.file:
+    path: '{{ arch_opencode_config_directory_path }}'
+    mode: '0755'
+    state: directory
 
 - name: Template opencode configuration
   ansible.builtin.template:
