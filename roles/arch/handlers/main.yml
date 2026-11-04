@@ -12,3 +12,4 @@
       - --create-symlinks
       - --disable-safe-mode
       - '{{ arch_git_repos_directory_path }}/dotfiles'
+    become_user: '{{ arch_dev_user_name }}'
