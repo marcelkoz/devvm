@@ -12,6 +12,15 @@
   ansible.builtin.debug:
     msg: '{{ common_bootloader_root_partition_uuid_result.stdout }}'
 
+- name: Create systemd-boot configuration directories
+  ansible.builtin.file:
+    path: '{{ item }}'
+    mode: '{{ common_bootloader_directory_permissions }}'
+    state: directory
+  loop:
+    - '{{ common_bootloader_parent_directory_path }}'
+    - '{{ common_bootloader_entries_directory_path }}'
+
 - name: Template systemd-boot main config file
   ansible.builtin.template:
     src: 'templates/loader.conf.j2'

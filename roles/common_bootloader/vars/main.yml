@@ -1,8 +1,10 @@
 common_bootloader_root_partition_path: /dev/sda2
 common_bootloader_boot_mount_point: /boot
-common_bootloader_entries_directory_path: '{{ common_bootloader_boot_mount_point }}/loader/entries'
-common_bootloader_config_file_path: '{{ common_bootloader_boot_mount_point }}/loader/loader.conf'
-common_bootloader_file_permissions: '0755'
+common_bootloader_parent_directory_path: '{{ common_bootloader_boot_mount_point }}/loader'
+common_bootloader_entries_directory_path: '{{ common_bootloader_parent_directory_path }}/entries'
+common_bootloader_config_file_path: '{{ common_bootloader_parent_directory_path }}/loader.conf'
+common_bootloader_directory_permissions: '0755'
+common_bootloader_file_permissions: '0644'
 common_bootloader_entries:
   - { template: 'templates/arch.conf.j2', name: 'arch.conf' }
   - { template: 'templates/arch-shell.conf.j2', name: 'arch-shell.conf' }
