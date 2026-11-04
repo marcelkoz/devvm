@@ -5,10 +5,9 @@
 
 - name: Check specified pacman packages are installed
   community.general.pacman:
-    name: '{{ item.value }}'
+    name: '{{ arch_packages | dict2items | map(attribute="value") | flatten }}'
     update_cache: true
     state: present
-  loop: '{{ arch_packages | dict2items }}'
 
 - name: Uninstall specified flatpak packages
   community.general.flatpak:
