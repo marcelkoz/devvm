@@ -9,11 +9,6 @@
     - Templates
     - Videos
 
-# https://github.com/shalva97/kde-configuration-files
-- name: Set KDE config directory fact
-  ansible.builtin.set_fact:
-    arch_kde_config_directory_path: '{{ arch_dev_user_home_path }}/.config'
-
 - name: Get current KDE global theme
   ansible.builtin.command: kreadconfig6 --group KDE --key LookAndFeelPackage
   register: arch_current_kde_theme_result

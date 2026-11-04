@@ -8,7 +8,7 @@
   ansible.builtin.command:
     argv:
       - python
-      - '{{ arch_repos_directory_path }}/dotfiles/dotfiles.py'
+      - '{{ arch_git_repos_directory_path }}/dotfiles/dotfiles.py'
       - --create-symlinks
       - --disable-safe-mode
-      - '{{ arch_repos_directory_path }}/dotfiles'
+      - '{{ arch_git_repos_directory_path }}/dotfiles'

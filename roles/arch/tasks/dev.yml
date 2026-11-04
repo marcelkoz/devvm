@@ -1,8 +1,3 @@
-- name: Set vscode config directory fact
-  ansible.builtin.set_fact:
-    arch_vscode_config_directory_path: '{{ arch_dev_user_home_path }}/.config/Code - OSS'
-    arch_ai_skills_repos_parent_directory_path: '{{ arch_dev_user_home_path }}/{{ arch_dev_user_home_directories.skills_repos }}'
-
 - name: Template vscode settings file
   ansible.builtin.template:
     src: 'templates/vscode-settings.json.j2'

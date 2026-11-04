@@ -28,10 +28,14 @@ arch_dev_user_home_directories:
 
 arch_dev_php_config_file_path: /etc/php/php.ini
 
+arch_git_repos_directory_path: '{{ arch_dev_user_home_path }}/{{ arch_dev_user_home_directories.repos }}'
+arch_git_third_party_repos_directory_path: '{{ arch_dev_user_home_path }}/{{ arch_dev_user_home_directories.third_party_repos }}'
 arch_git_user_name: Marcel Kozlowski
 arch_git_user_email: 37003922+marcelkoz@users.noreply.github.com
 arch_git_default_branch_name: main
 
+# https://github.com/shalva97/kde-configuration-files
+arch_kde_config_directory_path: '{{ arch_dev_user_home_path }}/.config'
 arch_kde_global_theme: org.kde.breezedark.desktop
 arch_kde_keymap: gb
 arch_kde_power_dim:
@@ -42,12 +46,13 @@ arch_kde_power_turn_off:
   idle: false
   timeout_seconds: -1
 
+arch_ai_skills_repos_parent_directory_path: '{{ arch_dev_user_home_path }}/{{ arch_dev_user_home_directories.skills_repos }}'
 arch_global_ai_skills_repos:
   tech_skills: https://github.com/marcelkoz/tech-skills
   ponytail: https://github.com/DietrichGebert/ponytail
   caveman: https://github.com/JuliusBrussee/caveman
 
-arch_opencode_config_directory_path: ~/.config/opencode
+arch_opencode_config_directory_path: '{{ arch_dev_user_home_path }}/.config/opencode'
 arch_opencode_config_file_path: '{{ arch_opencode_config_directory_path }}/opencode.jsonc'
 arch_opencode_config_formatter: true
 arch_opencode_config_permissions:
