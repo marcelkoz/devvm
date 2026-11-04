@@ -23,14 +23,14 @@
     repo: '{{ item.value }}'
     dest: '{{ arch_ai_skills_repos_parent_directory_path }}/{{ item.key | replace("_", "-") }}'
     clone: true
-  loop: '{{ arch_global_ai_skills_repos | dict2items }}'
+  loop: '{{ arch_ai_skills_repos | dict2items }}'
 
 - name: Find all AI skills directories
   ansible.builtin.find:
     paths: '{{ arch_ai_skills_repos_parent_directory_path }}/{{ item.key | replace("_", "-") }}/skills'
     file_type: directory
     recurse: false
-  loop: '{{ arch_global_ai_skills_repos | dict2items }}'
+  loop: '{{ arch_ai_skills_repos | dict2items }}'
   register: arch_ai_skills_directories
 
 - name: Symlink the AI skills directories
