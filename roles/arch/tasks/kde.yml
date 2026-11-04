@@ -1,13 +1,10 @@
-- name: Remove unecessary directories in the dev user home created by KDE
-  ansible.builtin.file:
-    path: '{{ arch_dev_user_home_path }}/{{ item }}'
-    state: absent
-  loop:
-    - Music
-    - Pictures
-    - Public
-    - Templates
-    - Videos
+- name: Template default XDG home directories
+  ansible.builtin.template:
+    src: templates/user-dirs.defaults.j2
+    dest: /etc/xdg/user-dirs.defaults
+    mode: '0644'
+  become: true
+  become_user: root
 
 - name: Get current KDE global theme
   ansible.builtin.command: kreadconfig6 --group KDE --key LookAndFeelPackage

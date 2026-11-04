@@ -25,6 +25,7 @@ arch_dev_user_home_directories:
   downloads: Downloads
   documents: Documents
   scratch: Scratch
+  pictures: Pictures
 
 arch_dev_php_config_file_path: /etc/php/php.ini
 
