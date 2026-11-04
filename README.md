@@ -38,8 +38,7 @@ scp ~/.ssh/{KEY_NAME} root@{ARCH_IP}:/root/.ssh/authorized_keys
 Run the bootstrap phase:
 
 ```bash
-ANSIBLE_ARGS='-i hosts.yml'
-ansible-playbook $ANSIBLE_ARGS site.yml --tags bootstrap
+ansible-playbook site.yml --tags bootstrap
 ```
 
 This performs disk partitioning, filesystem setup, base system installation, bootloader configuration, and mirror selection. Reboot after completion to enter phase 2.
@@ -50,14 +49,13 @@ This performs disk partitioning, filesystem setup, base system installation, boo
 Update `hosts.yml` with the new IP address obtained by the machine and run the configuration phase:
 
 ```bash
-ANSIBLE_ARGS='-i hosts.yml'
-ansible-playbook $ANSIBLE_ARGS site.yml --tags arch
+ansible-playbook site.yml
 ```
 
 To skip AUR packages:
 
 ```bash
-ansible-playbook $ANSIBLE_ARGS site.yml --tags arch --skip-tags aur
+ansible-playbook site.yml --skip-tags aur
 ```
 
 ## Configuration
