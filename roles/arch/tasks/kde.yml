@@ -1,6 +1,6 @@
 - name: Remove unecessary directories in the dev user home created by KDE
   ansible.builtin.file:
-    path: '{{ arch_dev_user_result.home }}/{{ item }}'
+    path: '{{ arch_dev_user_home_path }}/{{ item }}'
     state: absent
   loop:
     - Music
@@ -12,7 +12,7 @@
 # https://github.com/shalva97/kde-configuration-files
 - name: Set KDE config directory fact
   ansible.builtin.set_fact:
-    arch_kde_config_directory_path: '{{ arch_dev_user_result.home }}/.config'
+    arch_kde_config_directory_path: '{{ arch_dev_user_home_path }}/.config'
 
 - name: Get current KDE global theme
   ansible.builtin.command: kreadconfig6 --group KDE --key LookAndFeelPackage

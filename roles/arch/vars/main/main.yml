@@ -5,6 +5,7 @@ arch_sudo_group: wheel
 arch_sudo_password_feedback: true
 
 arch_dev_user_name: marcel
+arch_dev_user_home_path: '/home/{{ arch_dev_user_name }}'
 arch_dev_user_shell: /bin/bash
 arch_dev_user_groups:
   - '{{ arch_sudo_group }}'

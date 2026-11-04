@@ -39,11 +39,11 @@
     shell: '{{ arch_dev_user_shell }}'
     groups: '{{ arch_dev_user_groups }}'
     append: true
-  register: arch_dev_user_result
+    home: '{{ arch_dev_user_home_path }}'
 
 - name: Create home directory structure for dev user
   ansible.builtin.file:
-    path: '{{ arch_dev_user_result.home }}/{{ item.value }}'
+    path: '{{ arch_dev_user_home_path }}/{{ item.value }}'
     owner: '{{ arch_dev_user_name }}'
     group: '{{ arch_dev_user_name }}'
     mode: '0755'

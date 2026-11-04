@@ -1,7 +1,7 @@
 - name: Set repo directories fact
   ansible.builtin.set_fact:
-    arch_repos_directory_path: '{{ arch_dev_user_result.home }}/{{ arch_dev_user_home_directories.repos }}'
-    arch_third_party_repos_directory_path: '{{ arch_dev_user_result.home }}/{{ arch_dev_user_home_directories.third_party_repos }}'
+    arch_repos_directory_path: '{{ arch_dev_user_home_path }}/{{ arch_dev_user_home_directories.repos }}'
+    arch_third_party_repos_directory_path: '{{ arch_dev_user_home_path }}/{{ arch_dev_user_home_directories.third_party_repos }}'
 
 - name: Clone personal repos to dev user home
   # noqa: latest
