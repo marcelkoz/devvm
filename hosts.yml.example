@@ -3,7 +3,6 @@ all:
   # https://github.com/systemd/systemd/issues/43697
   vars:
     ansible_ssh_common_args: '-o "SetEnv TERM=dumb"'
-    custom_ansible_managed: 'This is an ansible managed file. Do not edit!'
   hosts:
     arch_test:
       ansible_user: root
