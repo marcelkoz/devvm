@@ -19,6 +19,7 @@ arch_dev_user_third_party_git_repos:
 arch_dev_user_home_directories:
   repos: Repos
   third_party_repos: ThirdPartyRepos
+  skills_repos: SkillsRepos
   desktop: Desktop
   downloads: Downloads
   documents: Documents
@@ -41,6 +42,7 @@ arch_kde_power_turn_off:
   timeout_seconds: -1
 
 arch_global_ai_skills_repos:
+  tech_skills: https://github.com/marcelkoz/tech-skills
   ponytail: https://github.com/DietrichGebert/ponytail
   caveman: https://github.com/JuliusBrussee/caveman
 

@@ -1,6 +1,7 @@
 - name: Set vscode config directory fact
   ansible.builtin.set_fact:
     arch_vscode_config_directory_path: '{{ arch_dev_user_result.home }}/.config/Code - OSS'
+    arch_ai_skills_repos_parent_directory_path: '{{ arch_dev_user_result.home }}/{{ arch_dev_user_home_directories.skills_repos }}'
 
 - name: Template vscode settings file
   ansible.builtin.template:
@@ -15,17 +16,23 @@
     prepend_newline: true
     block: '. /usr/share/nvm/init-nvm.sh'
 
+- name: Create agents skills directory
+  ansible.builtin.file:
+    path: '{{ arch_dev_user_result.home }}/.agents/skills'
+    mode: '0755'
+    state: directory
+
 - name: Clone AI skills repositories
   # noqa: latest
   ansible.builtin.git:
     repo: '{{ item.value }}'
-    dest: '{{ arch_third_party_repos_directory_path }}/{{ item.key }}'
+    dest: '{{ arch_ai_skills_repos_parent_directory_path }}/{{ item.key | replace("_", "-") }}'
     clone: true
   loop: '{{ arch_global_ai_skills_repos | dict2items }}'
 
 - name: Find all AI skills directories
   ansible.builtin.find:
-    paths: '{{ arch_third_party_repos_directory_path }}/{{ item.key }}/skills'
+    paths: '{{ arch_ai_skills_repos_parent_directory_path }}/{{ item.key | replace("_", "-") }}/skills'
     file_type: directory
     recurse: false
   loop: '{{ arch_global_ai_skills_repos | dict2items }}'
