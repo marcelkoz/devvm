@@ -1,10 +1,20 @@
 arch_vscode_config_directory_path: '{{ arch_dev_user_home_path }}/.config/Code - OSS'
 
-arch_vscode_config_colour_theme: Dark+
 arch_vscode_config_font_family: "'Fira Code', Consolas, 'Courier New', monospace"
 arch_vscode_config_font_size: 16
 
-arch_vscode_config_disable_copilot_file_types:
-  - html
-  - css
-  - json
+arch_vscode_config_object:
+  workbench.colorTheme: Dark+
+  terminal.integrated.fontFamily: '{{ arch_vscode_config_font_family }}'
+  terminal.integrated.fontSize: '{{ arch_vscode_config_font_size }}'
+  editor.fontFamily: '{{ arch_vscode_config_font_family }}'
+  editor.fontSize: '{{ arch_vscode_config_font_size }}'
+  editor.fontLigatures: true
+  editor.guides.bracketPairs: true
+  explorer.confirmDragAndDrop: false
+  redhat.telemetry.enabled: false
+  ansible.lightspeed.enabled: false
+  github.copilot.enable:
+    - html
+    - css
+    - json
