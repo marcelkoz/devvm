@@ -15,6 +15,6 @@ arch_vscode_config_object:
   redhat.telemetry.enabled: false
   ansible.lightspeed.enabled: false
   github.copilot.enable:
-    - html
-    - css
-    - json
+    html: false
+    css: false
+    json: false
