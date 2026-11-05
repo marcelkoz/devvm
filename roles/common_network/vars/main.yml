@@ -1,3 +1,5 @@
+common_network_hostname_enabled: true
+common_network_hostname_method: systemd
 common_network_interface_config_directory_path: /etc/systemd/network
 common_network_ssh_config_directory_path: /etc/ssh/sshd_config.d
 common_network_ssh_config_pubkey_auth: 'yes'

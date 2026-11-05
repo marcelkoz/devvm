@@ -1,3 +1,9 @@
+- name: Set hostname to inventory asset name
+  ansible.builtin.hostname:
+    name: '{{ inventory_hostname }}'
+    use: '{{ common_network_hostname_method }}'
+  when: common_network_hostname_enabled
+
 - name: Template wired network interface config files
   ansible.builtin.template:
     src: templates/xx-wired.network.j2
