@@ -2,7 +2,6 @@ bootstrap_timezone: Europe/London
 bootstrap_locale_full: en_GB.UTF-8 UTF-8
 bootstrap_locale_partial: en_GB.UTF-8
 bootstrap_keymap: uk
-bootstrap_hostname: mort
 
 bootstrap_temp_directory_path: /tmp/ansible-bootstrap
 bootstrap_completion_file_permissions: '0444'

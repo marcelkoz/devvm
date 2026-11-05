@@ -154,6 +154,7 @@
   ansible.builtin.include_role:
     name: common_network
   vars:
+    common_network_hostname_enabled: false
     common_network_interface_config_directory_path: '{{ bootstrap_mount_point.root }}/etc/systemd/network'
     common_network_dns_config_directory_path: '{{ bootstrap_mount_point.root }}/etc/systemd/resolved.conf.d'
     common_network_resolv_symlink_destination_path: '{{ bootstrap_mount_point.root }}/etc/resolv.conf'

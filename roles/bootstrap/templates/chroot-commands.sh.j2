@@ -9,7 +9,7 @@ echo 'LANG={{ bootstrap_locale_partial }}' > /etc/locale.conf
 echo 'KEYMAP={{ bootstrap_keymap }}' > /etc/vconsole.conf
 
 # general
-echo '{{ bootstrap_hostname }}' > /etc/hostname
+hostnamectl hostname '{{ inventory_hostname }}'
 echo 'root:{{ ansible_become_pass }}' | chpasswd
 
 # systemd
