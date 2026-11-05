@@ -16,3 +16,8 @@ arch_opencode_config_object:
         effect: deny
       - resource: rm -rf *
         effect: deny
+    mcp:
+      local-docmd:
+        enabled: true
+        type: local
+        command: [docmd, mcp]
