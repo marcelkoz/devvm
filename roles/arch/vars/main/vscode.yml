@@ -4,6 +4,8 @@ arch_vscode_config_font_family: "'Fira Code', Consolas, 'Courier New', monospace
 arch_vscode_config_font_size: 16
 
 arch_vscode_config_object:
+  files.autoSave: afterDelay
+  files.autoSaveDelay: 5000
   workbench.colorTheme: Dark+
   terminal.integrated.fontFamily: '{{ arch_vscode_config_font_family }}'
   terminal.integrated.fontSize: '{{ arch_vscode_config_font_size }}'
