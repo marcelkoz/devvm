@@ -1,17 +1,3 @@
 {{ custom_ansible_managed | comment('c') }}
 
-{
-    "$schema": "https://opencode.ai/config.json",
-    "formatter": {{ arch_opencode_config_formatter | lower }},
-    "permission": {
-{% for tool, permission_object in arch_opencode_config_permissions.items() %}
-        "{{ tool }}": {
-{% for permisson in permission_object %}
-            "{{ permisson.resource }}": "{{ permisson.effect }}"{% if not loop.last %},{% endif %}
-
-{% endfor %}
-        }{% if not loop.last %},{% endif %}
-
-{% endfor %}
-    }
-}
+{{ arch_opencode_config_object | to_nice_json(**arch_json_config) }}

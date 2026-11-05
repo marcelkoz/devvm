@@ -1,0 +1,18 @@
+arch_opencode_config_directory_path: '{{ arch_dev_user_home_path }}/.config/opencode'
+arch_opencode_config_file_path: '{{ arch_opencode_config_directory_path }}/opencode.jsonc'
+arch_opencode_config_object:
+  $schema: https://opencode.ai/config.json
+  formatter: true
+  permission:
+    read:
+      - resource: '**/.ssh/**'
+        effect: deny
+    shell:
+      - resource: '*'
+        effect: ask
+      - resource: git status *
+        effect: allow
+      - resource: git push *
+        effect: deny
+      - resource: rm -rf *
+        effect: deny
