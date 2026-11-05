@@ -26,6 +26,18 @@
     mode: '0755'
     state: directory
 
+- name: Create opencode configuration directory
+  ansible.builtin.file:
+    path: '{{ arch_opencode_config_directory_path }}'
+    mode: '0755'
+    state: directory
+
+- name: Template opencode configuration
+  ansible.builtin.template:
+    src: 'templates/opencode.jsonc.j2'
+    dest: '{{ arch_opencode_config_file_path }}'
+    mode: '0644'
+
 - name: Clone AI skills repositories
   # noqa: latest
   ansible.builtin.git:
@@ -48,15 +60,3 @@
     dest: '{{ arch_dev_user_home_path }}/.agents/skills/{{ item | basename }}'
     state: link
   loop: '{{ arch_ai_skills_directories.results | map(attribute="files") | flatten | map(attribute="path") }}'
-
-- name: Create opencode configuration directory
-  ansible.builtin.file:
-    path: '{{ arch_opencode_config_directory_path }}'
-    mode: '0755'
-    state: directory
-
-- name: Template opencode configuration
-  ansible.builtin.template:
-    src: 'templates/opencode.jsonc.j2'
-    dest: '{{ arch_opencode_config_file_path }}'
-    mode: '0644'
