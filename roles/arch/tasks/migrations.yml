@@ -1,0 +1,9 @@
+- name: Delete .nvm directory
+  ansible.builtin.file:
+    path: '{{ arch_dev_user_home_path }}/.nvm'
+    state: absent
+
+- name: Remove nvm from shell environment files
+  ansible.builtin.blockinfile:
+    path: '{{ arch_dev_user_home_path }}/.bashenv'
+    state: absent

@@ -54,7 +54,8 @@ arch_packages:
   languages:
     - composer # php
     - go
-    - nvm # node
+    - nodejs
+    - npm
     - php
     - php-sqlite
     - pyenv # python
@@ -84,6 +85,14 @@ arch_packages_absent:
   - google-chrome
   - visual-studio-code-bin
   - gemini-cli
+  - nvm
+
+arch_npm_global_packages_parent_path: '{{ arch_dev_user_home_path }}/.local'
+
+arch_npm_global_packages:
+  - '@docmd/core'
+
+arch_npm_global_packages_absent: []
 
 arch_flatpak_packages:
   flathub:

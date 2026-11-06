@@ -74,3 +74,25 @@
     backup: true
     marker: '; {mark} ANSIBLE MANAGED BLOCK'
     block: 'extension=pdo_sqlite'
+
+- name: Uninstall specified npm global packages
+  community.general.npm:
+    name: '{{ item }}'
+    global: true
+    state: absent
+  loop: '{{ arch_npm_global_packages_absent }}'
+  become: true
+  become_user: '{{ arch_dev_user_name }}'
+  environment:
+    NPM_CONFIG_PREFIX: '{{ arch_npm_global_packages_parent_path }}'
+
+- name: Check specified npm global packages are installed
+  community.general.npm:
+    name: '{{ item }}'
+    global: true
+    state: present
+  loop: '{{ arch_npm_global_packages }}'
+  become: true
+  become_user: '{{ arch_dev_user_name }}'
+  environment:
+    NPM_CONFIG_PREFIX: '{{ arch_npm_global_packages_parent_path }}'

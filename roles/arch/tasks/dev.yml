@@ -13,13 +13,6 @@
     dest: '{{ arch_vscode_config_directory_path }}/User/settings.json'
     mode: '0644'
 
-- name: Add nvm to shell environment files
-  ansible.builtin.blockinfile:
-    path: '{{ arch_dev_user_home_path }}/.bashenv'
-    append_newline: true
-    prepend_newline: true
-    block: '. /usr/share/nvm/init-nvm.sh'
-
 - name: Create agents skills directory
   ansible.builtin.file:
     path: '{{ arch_dev_user_home_path }}/.agents/skills'
