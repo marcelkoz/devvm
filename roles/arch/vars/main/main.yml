@@ -52,6 +52,7 @@ arch_ai_skills_repos:
   tech_skills: https://github.com/marcelkoz/tech-skills
   ponytail: https://github.com/DietrichGebert/ponytail
   caveman: https://github.com/JuliusBrussee/caveman
+  docmd: https://github.com/docmd-io/docmd-skills
 
 arch_json_config:
   sort_keys: true
