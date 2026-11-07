@@ -73,7 +73,15 @@
   vars:
     module_name: '{{ item.key | replace("_", "-") }}'
 
-# TODO: make this indepotent
+- name: Read installed lola modules file
+  ansible.builtin.slurp:
+    src: '{{ arch_ai_lola_installed_file_path }}'
+  register: arch_ai_lola_installed_modules_data
+
+- name: Parse the installed lola modules file
+  ansible.builtin.set_fact:
+    arch_ai_lola_installed_modules: '{{ (arch_ai_lola_installed_modules_data.content | b64decode | from_yaml).installations | map(attribute="module") }}'
+
 - name: Install lola ai modules
   ansible.builtin.command:
     argv:
@@ -84,6 +92,8 @@
       - '{{ arch_ai_module_output_type }}'
       - --scope
       - user
+  when: module_name not in arch_ai_lola_installed_modules
+  changed_when: true
   loop: '{{ arch_ai_module_repos.keys() + arch_ai_module_repos_with_submodules.keys() }}'
   vars:
     module_name: '{{ item | replace("_", "-") }}'
