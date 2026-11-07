@@ -33,5 +33,11 @@
     apply:
       become_user: '{{ arch_dev_user_name }}'
 
+- name: AI configuration
+  ansible.builtin.include_tasks: ai.yml
+  args:
+    apply:
+      become_user: '{{ arch_dev_user_name }}'
+
 - name: Old configuration migrations and cleanup
   ansible.builtin.include_tasks: migrations.yml
