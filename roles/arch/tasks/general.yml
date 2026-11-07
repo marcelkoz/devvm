@@ -51,7 +51,7 @@
     path: '{{ arch_dev_user_home_path }}/{{ item.value }}'
     owner: '{{ arch_dev_user_name }}'
     group: '{{ arch_dev_user_name }}'
-    mode: '0755'
+    mode: '{{ arch_standard_directory_permissions }}'
     state: directory
   loop: '{{ arch_dev_user_home_directories | dict2items }}'
 

@@ -1,7 +1,7 @@
 - name: Create vscode configuration directories
   ansible.builtin.file:
     path: '{{ item }}'
-    mode: '0755'
+    mode: '{{ arch_standard_directory_permissions }}'
     state: directory
   loop:
     - '{{ arch_vscode_config_directory_path }}'
@@ -11,24 +11,24 @@
   ansible.builtin.template:
     src: 'templates/vscode-settings.json.j2'
     dest: '{{ arch_vscode_config_directory_path }}/User/settings.json'
-    mode: '0644'
+    mode: '{{ arch_standard_file_permissions }}'
 
 - name: Create opencode configuration directory
   ansible.builtin.file:
     path: '{{ arch_opencode_config_directory_path }}'
-    mode: '0755'
+    mode: '{{ arch_standard_directory_permissions }}'
     state: directory
 
 - name: Template opencode configuration
   ansible.builtin.template:
     src: 'templates/opencode.jsonc.j2'
     dest: '{{ arch_opencode_config_file_path }}'
-    mode: '0644'
+    mode: '{{ arch_standard_file_permissions }}'
 
 - name: Create bash completions script directory
   ansible.builtin.file:
     path: '{{ arch_bash_completion_script_directory_path }}'
-    mode: '0755'
+    mode: '{{ arch_standard_directory_permissions }}'
     state: directory
 
 - name: Generate lola bash completion script
@@ -41,7 +41,7 @@
   ansible.builtin.copy:
     content: '{{ arch_ai_lola_bash_completion_script_contents.stdout }}'
     dest: '{{ arch_bash_completion_script_directory_path }}/lola'
-    mode: '0644'
+    mode: '{{ arch_standard_file_permissions }}'
 
 - name: Add lola ai modules (without submodules)
   ansible.builtin.command:
