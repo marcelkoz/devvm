@@ -62,6 +62,7 @@ arch_packages:
     - python
     - python-black
     - python-pip
+    - python-pipx
     - ruff # python
     - rustup # rust
 
@@ -93,6 +94,11 @@ arch_npm_global_packages:
   - '@docmd/core'
 
 arch_npm_global_packages_absent: []
+
+arch_pipx_packages:
+  - lola-ai
+
+arch_pipx_packages_absent: []
 
 arch_flatpak_packages:
   flathub:

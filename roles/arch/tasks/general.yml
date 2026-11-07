@@ -96,3 +96,19 @@
   become_user: '{{ arch_dev_user_name }}'
   environment:
     NPM_CONFIG_PREFIX: '{{ arch_npm_global_packages_parent_path }}'
+
+- name: Uninstall specified pipx packages
+  community.general.pipx:
+    name: '{{ item }}'
+    state: absent
+  loop: '{{ arch_pipx_packages_absent }}'
+  become: true
+  become_user: '{{ arch_dev_user_name }}'
+
+- name: Check specified pipx packages are installed
+  community.general.pipx:
+    name: '{{ item }}'
+    state: present
+  loop: '{{ arch_pipx_packages }}'
+  become: true
+  become_user: '{{ arch_dev_user_name }}'
