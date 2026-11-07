@@ -52,12 +52,9 @@ arch_packages:
     - wireshark-qt
 
   languages:
-    - composer # php
     - go
     - nodejs
     - npm
-    - php
-    - php-sqlite
     - pyenv # python
     - python
     - python-black

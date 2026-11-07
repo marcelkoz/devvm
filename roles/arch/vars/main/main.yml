@@ -26,8 +26,6 @@ arch_dev_user_home_directories:
   scratch: Scratch
   pictures: Pictures
 
-arch_dev_php_config_file_path: /etc/php/php.ini
-
 arch_git_repos_directory_path: '{{ arch_dev_user_home_path }}/{{ arch_dev_user_home_directories.repos }}'
 arch_git_third_party_repos_directory_path: '{{ arch_dev_user_home_path }}/{{ arch_dev_user_home_directories.third_party_repos }}'
 arch_git_user_name: Marcel Kozlowski
