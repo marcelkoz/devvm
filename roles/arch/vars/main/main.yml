@@ -20,7 +20,6 @@ arch_dev_user_third_party_git_repos:
 arch_dev_user_home_directories:
   repos: Repos
   third_party_repos: ThirdPartyRepos
-  skills_repos: SkillsRepos
   desktop: Desktop
   downloads: Downloads
   documents: Documents
@@ -47,12 +46,21 @@ arch_kde_power_turn_off:
   idle: false
   timeout_seconds: -1
 
-arch_ai_skills_repos_parent_directory_path: '{{ arch_dev_user_home_path }}/{{ arch_dev_user_home_directories.skills_repos }}'
-arch_ai_skills_repos:
+arch_bash_completion_script_directory_path: '{{ arch_dev_user_home_path }}/.local/share/bash-completion/completions'
+
+arch_ai_lola_executable_path: '{{ arch_dev_user_home_path }}/.local/bin/lola'
+arch_ai_lola_modules_path: '{{ arch_dev_user_home_path }}/.lola/modules'
+arch_ai_module_output_type: opencode
+arch_ai_module_repos:
   tech_skills: https://github.com/marcelkoz/tech-skills
   ponytail: https://github.com/DietrichGebert/ponytail
   caveman: https://github.com/JuliusBrussee/caveman
   docmd: https://github.com/docmd-io/docmd-skills
+
+arch_ai_module_repos_with_submodules:
+  ansible_collection_standards: https://github.com/ansible-community/ai-forge
+  ansible_content_development: https://github.com/ansible-community/ai-forge
+  ansible_role: https://github.com/ansible-community/ai-forge
 
 arch_json_config:
   sort_keys: true

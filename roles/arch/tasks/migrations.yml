@@ -7,3 +7,13 @@
   ansible.builtin.blockinfile:
     path: '{{ arch_dev_user_home_path }}/.bashenv'
     state: absent
+
+- name: Delete .agents/skills directory
+  ansible.builtin.file:
+    path: '{{ arch_dev_user_home_path }}/.agents/skills'
+    state: absent
+
+- name: Delete SkillsRepos directory
+  ansible.builtin.file:
+    path: '{{ arch_dev_user_home_path }}/SkillsRepos'
+    state: absent

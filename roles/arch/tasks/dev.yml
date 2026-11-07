@@ -13,12 +13,6 @@
     dest: '{{ arch_vscode_config_directory_path }}/User/settings.json'
     mode: '0644'
 
-- name: Create agents skills directory
-  ansible.builtin.file:
-    path: '{{ arch_dev_user_home_path }}/.agents/skills'
-    mode: '0755'
-    state: directory
-
 - name: Create opencode configuration directory
   ansible.builtin.file:
     path: '{{ arch_opencode_config_directory_path }}'
@@ -31,25 +25,65 @@
     dest: '{{ arch_opencode_config_file_path }}'
     mode: '0644'
 
-- name: Clone AI skills repositories
-  # noqa: latest
-  ansible.builtin.git:
-    repo: '{{ item.value }}'
-    dest: '{{ arch_ai_skills_repos_parent_directory_path }}/{{ item.key | replace("_", "-") }}'
-    clone: true
-  loop: '{{ arch_ai_skills_repos | dict2items }}'
-
-- name: Find all AI skills directories
-  ansible.builtin.find:
-    paths: '{{ arch_ai_skills_repos_parent_directory_path }}/{{ item.key | replace("_", "-") }}/skills'
-    file_type: directory
-    recurse: false
-  loop: '{{ arch_ai_skills_repos | dict2items }}'
-  register: arch_ai_skills_directories
-
-- name: Symlink the AI skills directories
+- name: Create bash completions script directory
   ansible.builtin.file:
-    src: '{{ item }}'
-    dest: '{{ arch_dev_user_home_path }}/.agents/skills/{{ item | basename }}'
-    state: link
-  loop: '{{ arch_ai_skills_directories.results | map(attribute="files") | flatten | map(attribute="path") }}'
+    path: '{{ arch_bash_completion_script_directory_path }}'
+    mode: '0755'
+    state: directory
+
+- name: Generate lola bash completion script
+  ansible.builtin.command:
+    cmd: '{{ arch_ai_lola_executable_path }} completions bash'
+  register: arch_ai_lola_bash_completion_script_contents
+  changed_when: false
+
+- name: Save lola bash completion script
+  ansible.builtin.copy:
+    content: '{{ arch_ai_lola_bash_completion_script_contents.stdout }}'
+    dest: '{{ arch_bash_completion_script_directory_path }}/lola'
+    mode: '0644'
+
+- name: Add lola ai modules (without submodules)
+  ansible.builtin.command:
+    argv:
+      - '{{ arch_ai_lola_executable_path }}'
+      - mod
+      - add
+      - --name
+      - '{{ module_name }}'
+      - '{{ item.value }}'
+    creates: '{{ arch_ai_lola_modules_path }}/{{ module_name }}'
+  loop: '{{ arch_ai_module_repos | dict2items }}'
+  vars:
+    module_name: '{{ item.key | replace("_", "-") }}'
+
+- name: Add lola ai modules (with submodules)
+  ansible.builtin.command:
+    argv:
+      - '{{ arch_ai_lola_executable_path }}'
+      - mod
+      - add
+      - --name
+      - '{{ module_name }}'
+      - --module-content
+      - '{{ module_name }}/module'
+      - '{{ item.value }}'
+    creates: '{{ arch_ai_lola_modules_path }}/{{ module_name }}'
+  loop: '{{ arch_ai_module_repos_with_submodules | dict2items }}'
+  vars:
+    module_name: '{{ item.key | replace("_", "-") }}'
+
+# TODO: make this indepotent
+- name: Install lola ai modules
+  ansible.builtin.command:
+    argv:
+      - '{{ arch_ai_lola_executable_path }}'
+      - install
+      - '{{ module_name }}'
+      - --assistant
+      - '{{ arch_ai_module_output_type }}'
+      - --scope
+      - user
+  loop: '{{ arch_ai_module_repos.keys() + arch_ai_module_repos_with_submodules.keys() }}'
+  vars:
+    module_name: '{{ item | replace("_", "-") }}'
