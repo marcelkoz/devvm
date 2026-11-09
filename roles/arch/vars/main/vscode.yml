@@ -5,7 +5,7 @@ arch_vscode_config_font_size: 16
 
 arch_vscode_config_object:
   files.autoSave: afterDelay
-  files.autoSaveDelay: 5000
+  files.autoSaveDelay: 1000
   workbench.colorTheme: Dark+
   workbench.secondarySideBar.defaultVisibility: hidden
   terminal.integrated.fontFamily: '{{ arch_vscode_config_font_family }}'
