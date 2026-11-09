@@ -89,6 +89,7 @@ arch_npm_global_packages_parent_path: '{{ arch_dev_user_home_path }}/.local'
 
 arch_npm_global_packages:
   - '@docmd/core'
+  - basemind
 
 arch_npm_global_packages_absent: []
 
