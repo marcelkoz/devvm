@@ -65,6 +65,13 @@
     - plasmalogin
     - vmtoolsd
 
+- name: Template docker daemon.json configuration
+  ansible.builtin.template:
+    src: templates/daemon.json.j2
+    dest: '{{ arch_docker_daemon_config_file_path }}'
+    mode: '{{ arch_standard_file_permissions }}'
+  notify: Restart docker
+
 - name: Uninstall specified npm global packages
   community.general.npm:
     name: '{{ item }}'
