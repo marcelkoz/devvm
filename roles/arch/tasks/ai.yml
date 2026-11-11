@@ -71,6 +71,9 @@
       - '{{ arch_ai_module_output_type }}'
       - --scope
       - user
+      # avoid global AGENTS.md pollution from installed modules
+      - --append-context
+      - ''
   when: module_name not in arch_ai_lola_installed_modules
   changed_when: true
   loop: '{{ arch_ai_module_repos.keys() + arch_ai_module_repos_with_submodules.keys() }}'
