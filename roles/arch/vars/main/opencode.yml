@@ -3,6 +3,8 @@ arch_opencode_config_file_path: '{{ arch_opencode_config_directory_path }}/openc
 arch_opencode_config_object:
   $schema: https://opencode.ai/config.json
   formatter: true
+  websearch:
+    provider: exa
   plugin:
     - basemind-opencode@latest
   permission:
