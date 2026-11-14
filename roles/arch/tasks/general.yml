@@ -86,6 +86,12 @@
     - plasmalogin
     - vmtoolsd
 
+- name: Create docker config directory
+  ansible.builtin.file:
+    path: '{{ arch_docker_config_directory_path }}'
+    mode: '{{ arch_standard_directory_permissions }}'
+    state: directory
+
 - name: Template docker daemon.json configuration
   ansible.builtin.template:
     src: templates/daemon.json.j2
