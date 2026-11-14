@@ -53,6 +53,17 @@
   notify:
     - Restart plasmalogin
 
+- name: Set idle lockout in KDE
+  community.general.kdeconfig:
+    path: '{{ arch_kde_config_directory_path }}/kscreenlockerrc'
+    values:
+      - groups: [Daemon]
+        key: Timeout
+        value: '{{ arch_kde_idle_lockout }}'
+    backup: true
+  notify:
+    - Restart plasmalogin
+
 - name: Create autostart directory
   ansible.builtin.file:
     path: '{{ arch_kde_config_directory_path }}/autostart'

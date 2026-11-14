@@ -45,6 +45,9 @@ arch_kde_power_turn_off:
   idle: false
   timeout_seconds: -1
 
+# minutes
+arch_kde_idle_lockout: 30
+
 arch_bash_completion_script_directory_path: '{{ arch_dev_user_home_path }}/.local/share/bash-completion/completions'
 
 arch_ai_lola_executable_path: '{{ arch_dev_user_home_path }}/.local/bin/lola'
