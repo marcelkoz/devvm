@@ -1,7 +1,7 @@
 - name: Create vscode configuration directories
   ansible.builtin.file:
     path: '{{ item }}'
-    mode: '{{ arch_standard_directory_permissions }}'
+    mode: '{{ global_standard_directory_permissions }}'
     state: directory
   loop:
     - '{{ arch_vscode_config_directory_path }}'
@@ -11,10 +11,10 @@
   ansible.builtin.template:
     src: 'templates/vscode-settings.json.j2'
     dest: '{{ arch_vscode_config_directory_path }}/User/settings.json'
-    mode: '{{ arch_standard_file_permissions }}'
+    mode: '{{ global_standard_file_permissions }}'
 
 - name: Create bash completions script directory
   ansible.builtin.file:
     path: '{{ arch_bash_completion_script_directory_path }}'
-    mode: '{{ arch_standard_directory_permissions }}'
+    mode: '{{ global_standard_directory_permissions }}'
     state: directory

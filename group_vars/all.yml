@@ -3,3 +3,8 @@ custom_ansible_managed: 'This is an ansible managed file. Do not edit!'
 global_json_config:
   sort_keys: true
   indent: 2
+
+# rw- r-- r--
+global_standard_file_permissions: '0644'
+# rwx r-x r-x
+global_standard_directory_permissions: '0755'

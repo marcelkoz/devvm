@@ -66,7 +66,7 @@
 - name: Populate skel with default home directories
   ansible.builtin.file:
     path: '{{ arch_skel_directory_path }}/{{ item.value }}'
-    mode: '{{ arch_standard_directory_permissions }}'
+    mode: '{{ global_standard_directory_permissions }}'
     owner: root
     group: root
     state: directory
@@ -85,7 +85,7 @@
     path: '{{ arch_dev_user_home_path }}/{{ item.value }}'
     owner: '{{ arch_dev_user_name }}'
     group: '{{ arch_dev_user_name }}'
-    mode: '{{ arch_standard_directory_permissions }}'
+    mode: '{{ global_standard_directory_permissions }}'
     state: directory
   loop: '{{ arch_dev_user_home_directories | dict2items }}'
 
@@ -102,14 +102,14 @@
 - name: Create docker config directory
   ansible.builtin.file:
     path: '{{ arch_docker_config_directory_path }}'
-    mode: '{{ arch_standard_directory_permissions }}'
+    mode: '{{ global_standard_directory_permissions }}'
     state: directory
 
 - name: Template docker daemon.json configuration
   ansible.builtin.template:
     src: templates/daemon.json.j2
     dest: '{{ arch_docker_daemon_config_file_path }}'
-    mode: '{{ arch_standard_file_permissions }}'
+    mode: '{{ global_standard_file_permissions }}'
   notify: Restart docker
 
 - name: Uninstall specified npm global packages

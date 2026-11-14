@@ -1,20 +1,20 @@
 - name: Create opencode configuration directory
   ansible.builtin.file:
     path: '{{ arch_opencode_config_directory_path }}'
-    mode: '{{ arch_standard_directory_permissions }}'
+    mode: '{{ global_standard_directory_permissions }}'
     state: directory
 
 - name: Template opencode configuration
   ansible.builtin.template:
     src: 'templates/opencode.jsonc.j2'
     dest: '{{ arch_opencode_config_file_path }}'
-    mode: '{{ arch_standard_file_permissions }}'
+    mode: '{{ global_standard_file_permissions }}'
 
 - name: Template AGENTS.md instructions
   ansible.builtin.template:
     src: templates/AGENTS.md.j2
     dest: '{{ arch_opencode_config_directory_path }}/AGENTS.md'
-    mode: '{{ arch_standard_file_permissions }}'
+    mode: '{{ global_standard_file_permissions }}'
 
 - name: Generate lola bash completion script
   ansible.builtin.command:
@@ -26,7 +26,7 @@
   ansible.builtin.copy:
     content: '{{ arch_ai_lola_bash_completion_script_contents.stdout }}'
     dest: '{{ arch_bash_completion_script_directory_path }}/lola'
-    mode: '{{ arch_standard_file_permissions }}'
+    mode: '{{ global_standard_file_permissions }}'
 
 - name: Add lola ai modules (without submodules)
   ansible.builtin.command:

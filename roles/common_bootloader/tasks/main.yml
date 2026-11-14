@@ -15,7 +15,7 @@
 - name: Create systemd-boot configuration directories
   ansible.builtin.file:
     path: '{{ item }}'
-    mode: '{{ common_bootloader_directory_permissions }}'
+    mode: '{{ global_standard_directory_permissions }}'
     state: directory
   loop:
     - '{{ common_bootloader_parent_directory_path }}'
@@ -25,11 +25,11 @@
   ansible.builtin.template:
     src: 'templates/loader.conf.j2'
     dest: '{{ common_bootloader_config_file_path }}'
-    mode: '{{ common_bootloader_file_permissions }}'
+    mode: '{{ global_standard_file_permissions }}'
 
 - name: Template systemd-boot entries
   ansible.builtin.template:
     src: '{{ item.template }}'
     dest: '{{ common_bootloader_entries_directory_path }}/{{ item.name }}'
-    mode: '{{ common_bootloader_file_permissions }}'
+    mode: '{{ global_standard_file_permissions }}'
   loop: '{{ common_bootloader_entries }}'

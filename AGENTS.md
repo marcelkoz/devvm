@@ -97,8 +97,8 @@ substitute for lint. Never claim a change was tested on a live host unless it wa
   changes configuration. Do not restart services inline.
 - No hardcoded user names, home paths, host names, IP addresses, timezones,
   keymaps, or file modes in tasks. Reference the existing variables.
-- File and directory modes come from `arch_standard_file_permissions` and
-  `arch_standard_directory_permissions` unless a tighter mode is required.
+- File and directory modes come from `global_standard_file_permissions` and
+  `global_standard_directory_permissions` unless a tighter mode is required.
 - Package lists belong in `roles/arch/defaults/main/packages.yml` under the existing
   groups. Add removals to the matching `*_absent` list instead of deleting a
   package silently.
