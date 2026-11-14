@@ -71,10 +71,19 @@ substitute for lint. Never claim a change was tested on a live host unless it wa
 - **Variable names are role-prefixed:** `arch_*`, `bootstrap_*`, `common_network_*`,
   `common_bootloader_*`, `common_mirrors_*`. Do not introduce unprefixed role
   variables.
-- **Variables live in `roles/<role>/vars/main/`,** split by domain. Ansible
-  loads every file in that directory as role vars, so keep names unique across the
-  files. The current layout intentionally uses `vars/` rather than `defaults/`; do
-  not migrate or add `defaults/` without discussion.
+- **Generic knobs live in `roles/<role>/defaults/main/`,** split by domain. Ansible
+  loads every file in that directory, so keep names unique across the files. Put
+  anything a user may reasonably change here: paths, file modes, package lists,
+  policy values, site settings, tool configuration objects. Role defaults are the
+  lowest precedence layer, so inventory, group vars and extra vars can override
+  them.
+- **`roles/<role>/vars/main/` holds values that must win over those overrides:**
+  personal identity (developer account, git author, personal repository URLs),
+  bootstrap machine layout and idempotency markers, template-to-filename maps, and
+  JSON serialization kwargs. Role vars beat inventory vars, so use this directory
+  only when overriding from the inventory would be wrong.
+- When adding a variable, default to `defaults/main/`. Reach for `vars/main/` only
+  for the categories above, and say why in the change description.
 - Use fully qualified collection names for modules and lookups, for example
   `ansible.builtin.template` and `community.general.pacman`.
 - Split task files by concern and include them from `tasks/main.yml` with
@@ -88,7 +97,7 @@ substitute for lint. Never claim a change was tested on a live host unless it wa
   keymaps, or file modes in tasks. Reference the existing variables.
 - File and directory modes come from `arch_standard_file_permissions` and
   `arch_standard_directory_permissions` unless a tighter mode is required.
-- Package lists belong in `roles/arch/vars/main/packages.yml` under the existing
+- Package lists belong in `roles/arch/defaults/main/packages.yml` under the existing
   groups. Add removals to the matching `*_absent` list instead of deleting a
   package silently.
 - npm global packages use `NPM_CONFIG_PREFIX` pointing at the user's `.local`.
@@ -133,7 +142,8 @@ working tree clean or explain what remains uncommitted.
 - [ ] No AUR helper or AUR-only package introduced.
 - [ ] Target remains Arch Linux; no other distributions added.
 - [ ] New tasks are idempotent and use FQCN modules.
-- [ ] New variables are role-prefixed and stored in the right `vars/main/` file.
+- [ ] New variables are role-prefixed and stored in `defaults/main/` unless they are
+      role internals, which belong in `vars/main/`.
 - [ ] No secrets or real personal values added to tracked files.
 - [ ] Service changes use a handler.
 - [ ] Templates keep the ansible-managed header and JSON generation pattern.
