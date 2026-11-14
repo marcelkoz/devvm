@@ -1,17 +1,12 @@
-arch_timezone: 'Europe/London'
-
-# rw- r-- r--
-arch_standard_file_permissions: '0644'
-# rwx r-x r-x
-arch_standard_directory_permissions: '0755'
-
-arch_sudo_config_directory_path: /etc/sudoers.d
-arch_sudo_group: wheel
-arch_sudo_password_feedback: true
-
-arch_skel_directory_path: /etc/skel
-
+arch_dev_user_name: marcel
+arch_dev_user_home_path: '/home/{{ arch_dev_user_name }}'
 arch_dev_user_shell: /bin/bash
+arch_dev_user_groups:
+  - '{{ arch_sudo_group }}'
+  - wireshark
+
+arch_dev_user_git_repos:
+  dotfiles: https://github.com/marcelkoz/dotfiles
 
 arch_dev_user_third_party_git_repos: {}
 
@@ -26,7 +21,22 @@ arch_dev_user_home_directories:
 
 arch_git_repos_directory_path: '{{ arch_dev_user_home_path }}/{{ arch_dev_user_home_directories.repos }}'
 arch_git_third_party_repos_directory_path: '{{ arch_dev_user_home_path }}/{{ arch_dev_user_home_directories.third_party_repos }}'
+arch_git_user_name: Marcel Kozlowski
+arch_git_user_email: 37003922+marcelkoz@users.noreply.github.com
 arch_git_default_branch_name: main
+
+arch_timezone: 'Europe/London'
+
+# rw- r-- r--
+arch_standard_file_permissions: '0644'
+# rwx r-x r-x
+arch_standard_directory_permissions: '0755'
+
+arch_sudo_config_directory_path: /etc/sudoers.d
+arch_sudo_group: wheel
+arch_sudo_password_feedback: true
+
+arch_skel_directory_path: /etc/skel
 
 # https://github.com/shalva97/kde-configuration-files
 arch_kde_config_directory_path: '{{ arch_dev_user_home_path }}/.config'
@@ -46,6 +56,12 @@ arch_ai_lola_executable_path: '{{ arch_dev_user_home_path }}/.local/bin/lola'
 arch_ai_lola_modules_path: '{{ arch_dev_user_home_path }}/.lola/modules'
 arch_ai_lola_installed_file_path: '{{ arch_dev_user_home_path }}/.lola/installed.yml'
 arch_ai_module_output_type: opencode
+# TODO: support uninstalling modules
+arch_ai_module_repos:
+  tech_skills: https://github.com/marcelkoz/tech-skills
+  ponytail: https://github.com/DietrichGebert/ponytail
+  caveman: https://github.com/JuliusBrussee/caveman
+  docmd: https://github.com/docmd-io/docmd-skills
 
 arch_ai_module_repos_with_submodules:
   ansible_collection_standards: https://github.com/ansible-community/ai-forge

@@ -78,10 +78,12 @@ substitute for lint. Never claim a change was tested on a live host unless it wa
   lowest precedence layer, so inventory, group vars and extra vars can override
   them.
 - **`roles/<role>/vars/main/` holds values that must win over those overrides:**
-  personal identity (developer account, git author, personal repository URLs),
   bootstrap machine layout and idempotency markers, template-to-filename maps, and
   JSON serialization kwargs. Role vars beat inventory vars, so use this directory
   only when overriding from the inventory would be wrong.
+- Personal identity (developer account, git author, personal repository URLs) is a
+  default too. The shipped values are this repository's own; override them from the
+  gitignored inventory rather than editing tracked files.
 - When adding a variable, default to `defaults/main/`. Reach for `vars/main/` only
   for the categories above, and say why in the change description.
 - Use fully qualified collection names for modules and lookups, for example
