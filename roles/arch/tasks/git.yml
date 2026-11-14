@@ -10,6 +10,9 @@
   failed_when:
     - arch_dev_user_repos_result.failed
     - not 'Local modifications exist in the destination' in arch_dev_user_repos_result.msg
+  # make this run when only the dotfiles repo changes
+  notify:
+    - Run dotfiles script
 
 - name: Clone third party repos to dev user home
   # noqa: latest
@@ -18,8 +21,6 @@
     dest: '{{ arch_git_third_party_repos_directory_path }}/{{ item.key }}'
     clone: true
   loop: '{{ arch_dev_user_third_party_git_repos | dict2items }}'
-  notify:
-    - Run dotfiles script
 
 - name: Set name in git config
   community.general.git_config:
