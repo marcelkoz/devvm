@@ -1,3 +1,15 @@
+- name: Check pacman database lock file is absent
+  ansible.builtin.stat:
+    path: '{{ arch_pacman_lock_file_path }}'
+  register: arch_pacman_lock_file
+
+- name: Assert pacman database is not locked
+  ansible.builtin.assert:
+    that: not arch_pacman_lock_file.stat.exists
+    fail_msg: >-
+      {{ arch_pacman_lock_file_path }} exists. Another pacman process is running or was
+      interrupted. Wait for it to finish, then investigate before removing the lock.
+
 - name: Uninstall specified pacman packages
   community.general.pacman:
     name: '{{ arch_packages_absent }}'

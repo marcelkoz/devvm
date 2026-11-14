@@ -1,3 +1,5 @@
+arch_pacman_lock_file_path: /var/lib/pacman/db.lck
+
 arch_packages:
   misc:
     - base-devel
