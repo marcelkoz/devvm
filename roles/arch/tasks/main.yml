@@ -1,10 +1,10 @@
 ---
 - name: Import common_bootloader role
-  ansible.builtin.include_role:
+  ansible.builtin.import_role:
     name: common_bootloader
 
 - name: Import common_network role
-  ansible.builtin.include_role:
+  ansible.builtin.import_role:
     name: common_network
 
 - name: General configuration
@@ -35,4 +35,4 @@
       become_user: '{{ arch_dev_user_name }}'
 
 - name: Old configuration migrations and cleanup
-  ansible.builtin.include_tasks: migrations.yml
+  ansible.builtin.import_tasks: migrations.yml
