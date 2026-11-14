@@ -2,5 +2,6 @@ arch_docker_config_directory_path: /etc/docker
 arch_docker_daemon_config_file_path: '{{ arch_docker_config_directory_path }}/daemon.json'
 arch_docker_config_object:
   dns:
+    - 172.16.20.1
     - 1.1.1.1
     - 8.8.8.8
