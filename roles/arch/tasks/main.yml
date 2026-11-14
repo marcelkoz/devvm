@@ -8,7 +8,7 @@
     name: common_network
 
 - name: General configuration
-  ansible.builtin.include_tasks: general.yml
+  ansible.builtin.import_tasks: general.yml
 
 - name: Git configuration
   ansible.builtin.include_tasks: git.yml

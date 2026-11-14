@@ -52,11 +52,13 @@ Update `hosts.yml` with the new IP address obtained by the machine and run the c
 ansible-playbook site.yml
 ```
 
-To skip AUR packages:
+If the play stops on a stale pacman lock (`/var/lib/pacman/db.lck`), first make sure no pacman process is running. Then remove the lock explicitly:
 
 ```bash
-ansible-playbook site.yml --skip-tags aur
+ansible-playbook site.yml --tags arch_pacman_unlock
 ```
+
+That run removes only the lock file. Rerun the normal phase 2 command afterwards.
 
 ## Configuration
 
