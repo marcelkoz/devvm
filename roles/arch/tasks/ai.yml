@@ -58,14 +58,22 @@
   vars:
     module_name: '{{ item.key | replace("_", "-") }}'
 
+# check if file exists before trying to parse it
+- name: Check installed local modules file exists
+  ansible.builtin.stat:
+    path: '{{ arch_ai_lola_installed_file_path }}'
+  register: arch_ai_lola_installed_modules_file
+
 - name: Read installed lola modules file
   ansible.builtin.slurp:
     src: '{{ arch_ai_lola_installed_file_path }}'
   register: arch_ai_lola_installed_modules_data
+  when: arch_ai_lola_installed_modules_file.stat.exists
 
 - name: Parse the installed lola modules file
   ansible.builtin.set_fact:
     arch_ai_lola_installed_modules: '{{ (arch_ai_lola_installed_modules_data.content | b64decode | from_yaml).installations | map(attribute="module") }}'
+  when: arch_ai_lola_installed_modules_file.stat.exists
 
 - name: Install lola ai modules
   ansible.builtin.command:
@@ -80,7 +88,7 @@
       # avoid global AGENTS.md pollution from installed modules
       - --append-context
       - ''
-  when: module_name not in arch_ai_lola_installed_modules
+  when: (not arch_ai_lola_installed_modules_file.stat.exists) or (module_name not in arch_ai_lola_installed_modules)
   changed_when: true
   loop: '{{ arch_ai_module_repos.keys() + arch_ai_module_repos_with_submodules.keys() }}'
   vars:
