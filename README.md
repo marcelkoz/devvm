@@ -62,4 +62,4 @@ That run removes only the lock file. Rerun the normal phase 2 command afterwards
 
 ## Configuration
 
-Modify `hosts.yml` and role variable files in `roles/*/vars/` to customize disk layout, user accounts, network configuration, and package selection. Template files in `roles/*/templates/` render configurations based on these variables.
+Modify `hosts.yml` and role variable files in `roles/*/defaults/main/` to customize disk layout, user accounts, network configuration, and package selection. Template files in `roles/*/templates/` render configurations based on these variables.
