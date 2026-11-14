@@ -59,6 +59,15 @@
     - { src: xx-sudo-wheel.j2, dest: 10-wheel }
     - { src: xx-sudo-prompt.j2, dest: 20-prompt }
 
+- name: Populate skel with default home directories
+  ansible.builtin.file:
+    path: '{{ arch_skel_directory_path }}/{{ item.value }}'
+    mode: '{{ arch_standard_directory_permissions }}'
+    owner: root
+    group: root
+    state: directory
+  loop: '{{ arch_dev_user_home_directories | dict2items }}'
+
 - name: Add dev user
   ansible.builtin.user:
     name: '{{ arch_dev_user_name }}'
