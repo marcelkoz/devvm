@@ -1,0 +1,17 @@
+<!-- {{ custom_ansible_managed }} -->
+
+# Agent instructions
+
+## Search and read
+
+When the current project is a git repository, use the basemind MCP server for file name and content search before reaching for shell tools.
+
+- Locate a file by name: `basemind` code mode `find`.
+- Search file contents: `basemind` code mode `grep`.
+- Read a file: code mode `outline` first, then `expand` for the one symbol you need.
+- History and blame: basemind `git` modes instead of `git log`, `git blame`, `git diff`.
+- PDFs, markdown, JSON, YAML, TOML: `memory` mode `documents`.
+
+Outside a repository, basemind has no index. Use the shell there.
+
+After edits, run the basemind `admin` mode `rescan` so new symbols are searchable.

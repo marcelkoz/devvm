@@ -10,6 +10,12 @@
     dest: '{{ arch_opencode_config_file_path }}'
     mode: '{{ arch_standard_file_permissions }}'
 
+- name: Template AGENTS.md instructions
+  ansible.builtin.template:
+    src: templates/AGENTS.md.j2
+    dest: '{{ arch_opencode_config_directory_path }}/AGENTS.md'
+    mode: '{{ arch_standard_file_permissions }}'
+
 - name: Generate lola bash completion script
   ansible.builtin.command:
     cmd: '{{ arch_ai_lola_executable_path }} completions bash'
