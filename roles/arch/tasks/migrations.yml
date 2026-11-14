@@ -3,10 +3,16 @@
     path: '{{ arch_dev_user_home_path }}/.nvm'
     state: absent
 
+- name: Check .bashenv file exists
+  ansible.builtin.stat:
+    path: '{{ arch_dev_user_home_path }}/.bashenv'
+  register: arch_bashenv_file
+
 - name: Remove nvm from shell environment files
   ansible.builtin.blockinfile:
     path: '{{ arch_dev_user_home_path }}/.bashenv'
     state: absent
+  when: arch_bashenv_file.stat.exists
 
 - name: Delete .agents/skills directory
   ansible.builtin.file:
