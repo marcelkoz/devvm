@@ -1,1 +1,5 @@
 custom_ansible_managed: 'This is an ansible managed file. Do not edit!'
+
+global_json_config:
+  sort_keys: true
+  indent: 2

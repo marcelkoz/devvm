@@ -112,7 +112,7 @@ substitute for lint. Never claim a change was tested on a live host unless it wa
 - Add the ansible-managed header where the file format supports comments:
   `{{ custom_ansible_managed | comment('c') }}` for JSON, `| comment` for shell.
   Keep `group_vars/all.yml`'s `custom_ansible_managed` value unchanged.
-- Generate JSON with `to_nice_json(**arch_json_config)` so ordering and indentation
+- Generate JSON with `to_nice_json(**global_json_config)` so ordering and indentation
   stay consistent.
 - Generated files are outputs. Edit the source variable map or template, never the
   rendered file on the target.
