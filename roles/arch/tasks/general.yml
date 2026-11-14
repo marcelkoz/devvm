@@ -1,3 +1,7 @@
+- name: Set the timezone
+  community.general.timezone:
+    name: '{{ arch_timezone }}'
+
 - name: Remove stale pacman database lock file
   ansible.builtin.file:
     path: '{{ arch_pacman_lock_file_path }}'
