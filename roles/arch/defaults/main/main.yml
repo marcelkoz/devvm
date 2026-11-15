@@ -65,3 +65,5 @@ arch_ai_module_repos_with_submodules:
   ansible_collection_standards: https://github.com/ansible-community/ai-forge
   ansible_content_development: https://github.com/ansible-community/ai-forge
   ansible_role: https://github.com/ansible-community/ai-forge
+
+arch_plasmalogin_service_override_directory: /etc/systemd/system/plasmalogin.service.d

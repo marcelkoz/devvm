@@ -4,3 +4,5 @@ common_bootloader_timeout_in_seconds: 3
 common_bootloader_resolution: auto
 common_bootloader_reboot_entry: true
 common_bootloader_firmware_entry: true
+# boot optimisation
+common_bootloader_quiet_boot: true

@@ -1,3 +1,20 @@
+- name: Create plasmalogin service override directory
+  ansible.builtin.file:
+    path: '{{ arch_plasmalogin_service_override_directory }}'
+    mode: '{{ global_standard_directory_permissions }}'
+    state: directory
+  become: true
+  become_user: root
+
+# boot optimisation
+- name: Template plasmalogin service override
+  ansible.builtin.template:
+    src: templates/plasmalogin.service.override.j2
+    dest: '{{ arch_plasmalogin_service_override_directory }}/override.conf'
+    mode: '{{ global_standard_file_permissions }}'
+  become: true
+  become_user: root
+
 - name: Template default XDG home directories
   ansible.builtin.template:
     src: templates/user-dirs.defaults.j2

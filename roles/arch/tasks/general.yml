@@ -95,9 +95,17 @@
     enabled: true
     state: started
   loop:
-    - docker
+    - docker.socket
     - plasmalogin
     - vmtoolsd
+
+# boot optimisation: docker socket can start the service
+- name: Disable services
+  ansible.builtin.service:
+    name: '{{ item }}'
+    enabled: false
+  loop:
+    - docker.service
 
 - name: Create docker config directory
   ansible.builtin.file:
