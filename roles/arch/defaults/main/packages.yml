@@ -65,6 +65,10 @@ arch_packages:
     - ruff # python
     - rustup # rust
 
+  shells:
+    - fish
+    - nushell
+
   llm:
     - opencode
 
