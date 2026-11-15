@@ -2,41 +2,39 @@ arch_pacman_lock_file_path: /var/lib/pacman/db.lck
 
 arch_packages:
   misc:
+    - ansible
+    - ansible-core
+    - ansible-lint
+    - azure-cli
     - base-devel
     - curl
+    - docker
+    - docker-buildx
+    - docker-compose
     - flatpak
     - fuse # appimages
     - fzf
+    - git
     - gtkmm3 # vmware clipboard sharing
     - jq
     - less
     - man-db
     - man-pages
+    - nano
     - open-vm-tools
     - openssh
-    - ripgrep
-    - sqlite
-    - tree
-    - ttf-fira-code
-    - unzip
-    - zip
-
-  tools:
-    - ansible
-    - ansible-core
-    - ansible-lint
-    - azure-cli
-    - docker
-    - docker-buildx
-    - docker-compose
-    - git
-    - nano
     - packer
     - podman
     - rclone
+    - ripgrep
+    - sqlite
     - terraform
+    - tree
     - trivy
+    - ttf-fira-code
+    - unzip
     - vim
+    - zip
 
   kubernetes:
     - argocd
