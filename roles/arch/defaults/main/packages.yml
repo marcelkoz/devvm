@@ -107,3 +107,16 @@ arch_flatpak_packages:
 
 arch_flatpak_packages_absent:
   flathub: []
+
+arch_vscode_extensions:
+  - golang.go
+  - hashicorp.terraform
+  - ms-python.debugpy
+  - ms-python.python
+  - ms-python.vscode-python-envs
+  - redhat.ansible
+  - redhat.vscode-yaml
+  - ritwickdey.liveserver
+  - sst-dev.opencode
+
+arch_vscode_extensions_absent: []

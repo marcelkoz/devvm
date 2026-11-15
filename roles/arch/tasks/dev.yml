@@ -13,6 +13,31 @@
     dest: '{{ arch_vscode_config_directory_path }}/User/settings.json'
     mode: '{{ global_standard_file_permissions }}'
 
+- name: Fetch installed vscode extensions
+  ansible.builtin.command: code --list-extensions
+  register: arch_vscode_installed_extensions
+  changed_when: false
+
+- name: Install vscode extensions
+  ansible.builtin.command:
+    argv:
+      - code
+      - --install-extension
+      - '{{ item }}'
+  loop: '{{ arch_vscode_extensions }}'
+  when: item not in arch_vscode_installed_extensions.stdout_lines
+  changed_when: true
+
+- name: Uninstall vscode extensions
+  ansible.builtin.command:
+    argv:
+      - code
+      - --uninstall-extension
+      - '{{ item }}'
+  loop: '{{ arch_vscode_extensions_absent }}'
+  when: item in arch_vscode_installed_extensions.stdout_lines
+  changed_when: true
+
 - name: Create bash completions script directory
   ansible.builtin.file:
     path: '{{ arch_bash_completion_script_directory_path }}'
