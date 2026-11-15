@@ -3,8 +3,6 @@ arch_pacman_lock_file_path: /var/lib/pacman/db.lck
 arch_packages:
   misc:
     - base-devel
-    - bash
-    - bash-completion
     - curl
     - flatpak
     - fuse # appimages
@@ -67,6 +65,8 @@ arch_packages:
     - rustup # rust
 
   shells:
+    - bash
+    - bash-completion
     - fish
     - nushell
 
