@@ -8,6 +8,7 @@ arch_packages:
     - curl
     - flatpak
     - fuse # appimages
+    - fzf
     - gtkmm3 # vmware clipboard sharing
     - jq
     - less
