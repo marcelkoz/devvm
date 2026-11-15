@@ -3,4 +3,4 @@
 title    Arch Linux
 linux    /vmlinuz-linux
 initrd   /initramfs-linux.img
-options  root=UUID={{ common_bootloader_root_partition_uuid_result.stdout | mandatory }} rw {{ 'quiet' if common_bootloader_quiet_boot else '' }}
+options  root=UUID={{ common_bootloader_root_partition_uuid_result.stdout | mandatory }} rw {{ 'quiet' if common_bootloader_quiet_boot else '' }} tsc={{ common_bootloader_timestamp_counter }}

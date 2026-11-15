@@ -3,4 +3,4 @@
 title    Arch Linux (Shell)
 linux    /vmlinuz-linux
 initrd   /initramfs-linux.img
-options  root=UUID={{ common_bootloader_root_partition_uuid_result.stdout | mandatory }} rw systemd.target=multi-user.target
+options  root=UUID={{ common_bootloader_root_partition_uuid_result.stdout | mandatory }} rw systemd.target=multi-user.target tsc={{ common_bootloader_timestamp_counter }}
