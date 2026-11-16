@@ -1,4 +1,9 @@
 ---
+- name: Update pacman cache
+  community.general.pacman:
+    update_cache: true
+  changed_when: false
+
 - name: Import common_bootloader role
   ansible.builtin.import_role:
     name: common_bootloader
