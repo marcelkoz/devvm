@@ -1,10 +1,27 @@
 common_bootloader_parent_directory_path: '{{ common_bootloader_boot_mount_point }}/loader'
 common_bootloader_entries_directory_path: '{{ common_bootloader_parent_directory_path }}/entries'
 common_bootloader_config_file_path: '{{ common_bootloader_parent_directory_path }}/loader.conf'
+
+common_bootloader_kernel_parameters_base:
+  - 'root=UUID={{ common_bootloader_root_partition_uuid_result.stdout | mandatory }}'
+  - rw
+  - 'tsc={{ common_bootloader_timestamp_counter }}'
+
 common_bootloader_entries:
-  - { template: 'templates/arch.conf.j2', name: 'arch.conf' }
-  - { template: 'templates/arch-shell.conf.j2', name: 'arch-shell.conf' }
-  - { template: 'templates/arch-fallback.conf.j2', name: 'arch-fallback.conf' }
+  - title: Arch Linux
+    filename: arch.conf
+    initramfs: '{{ common_bootloader_mkinitcpio_image_default_name }}'
+    kernel_parameters:
+      - '{{ "quiet" if common_bootloader_quiet_boot else "" }}'
+  - title: Arch Linux (Fallback)
+    filename: arch-fallback.conf
+    initramfs: '{{ common_bootloader_mkinitcpio_image_fallback_name }}'
+    kernel_parameters: []
+  - title: Arch Linux (Shell)
+    filename: arch-shell.conf
+    initramfs: '{{ common_bootloader_mkinitcpio_image_default_name }}'
+    kernel_parameters:
+      - systemd.unit=multi-user.target
 
 common_bootloader_mkinitcpio_config_file_path: /etc/mkinitcpio-custom.conf
 common_bootloader_mkinitcpio_preset_directory_path: /etc/mkinitcpio.d

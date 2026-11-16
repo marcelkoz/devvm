@@ -1,6 +1,0 @@
-{{ custom_ansible_managed | comment }}
-
-title    Arch Linux (Shell)
-linux    /vmlinuz-linux
-initrd   /{{ common_bootloader_mkinitcpio_image_default_name }}
-options  root=UUID={{ common_bootloader_root_partition_uuid_result.stdout | mandatory }} rw systemd.unit=multi-user.target tsc={{ common_bootloader_timestamp_counter }}

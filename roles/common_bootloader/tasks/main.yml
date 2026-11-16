@@ -52,7 +52,9 @@
 
 - name: Template systemd-boot entries
   ansible.builtin.template:
-    src: '{{ item.template }}'
-    dest: '{{ common_bootloader_entries_directory_path }}/{{ item.name }}'
+    src: templates/arch.conf.j2
+    dest: '{{ common_bootloader_entries_directory_path }}/{{ item.filename }}'
     mode: '{{ global_standard_file_permissions }}'
   loop: '{{ common_bootloader_entries }}'
+  loop_control:
+    label: '{{ item.filename }}'
