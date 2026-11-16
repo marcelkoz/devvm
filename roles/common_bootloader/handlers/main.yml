@@ -1,9 +1,3 @@
 - name: Regenerate initramfs
-  ansible.builtin.command:
-    argv:
-      - mkinitcpio
-      - --config
-      - '{{ common_bootloader_mkinitcpio_config_file_path }}'
-      - --preset
-      - '{{ common_bootloader_mkinitcpio_preset_file_path }}'
+  ansible.builtin.command: mkinitcpio -P
   changed_when: true

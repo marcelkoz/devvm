@@ -23,8 +23,8 @@ common_bootloader_entries:
     kernel_parameters:
       - systemd.unit=multi-user.target
 
-common_bootloader_mkinitcpio_config_file_path: /etc/mkinitcpio-custom.conf
+common_bootloader_mkinitcpio_config_file_path: /etc/mkinitcpio.conf
 common_bootloader_mkinitcpio_preset_directory_path: /etc/mkinitcpio.d
-common_bootloader_mkinitcpio_preset_file_path: '{{ common_bootloader_mkinitcpio_preset_directory_path }}/linux-custom.preset'
+common_bootloader_mkinitcpio_preset_file_path: '{{ common_bootloader_mkinitcpio_preset_directory_path }}/linux.preset'
 common_bootloader_mkinitcpio_image_default_name: initramfs-linux.img
 common_bootloader_mkinitcpio_image_fallback_name: initramfs-linux-fallback.img
