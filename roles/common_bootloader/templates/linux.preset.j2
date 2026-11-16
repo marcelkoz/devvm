@@ -1,0 +1,21 @@
+# mkinitcpio preset file for the 'linux' package
+
+# TODO: remove hardcoded path
+ALL_kver="/boot/vmlinuz-linux"
+#ALL_config="/etc/mkinitcpio.conf"
+#ALL_kerneldest="/boot/vmlinuz-linux"
+
+PRESETS=({{ common_bootloader_mkinitcpio_presets | join(" ") }})
+#PRESETS=('default')
+
+# TODO: handle different boot mountpoint
+default_image="/boot/{{ common_bootloader_mkinitcpio_image_default_name }}"
+#default_config="/etc/mkinitcpio.conf"
+#default_uki="/efi/EFI/Linux/arch-linux.efi"
+#default_options="--splash /usr/share/systemd/bootctl/splash-arch.bmp"
+
+# TODO: handle different boot mountpoint
+fallback_image="/boot/{{ common_bootloader_mkinitcpio_image_fallback_name }}"
+fallback_options="-S autodetect"
+#fallback_config="/etc/mkinitcpio.conf"
+#fallback_uki="/efi/EFI/Linux/arch-linux-fallback.efi"

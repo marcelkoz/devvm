@@ -6,3 +6,22 @@ common_bootloader_reboot_entry: true
 common_bootloader_firmware_entry: true
 common_bootloader_quiet_boot: true # boot optimisation
 common_bootloader_timestamp_counter: reliable
+
+common_bootloader_mkinitcpio_compression: zstd
+common_bootloader_mkinitcpio_hooks:
+  - base
+  - systemd
+  - autodetect
+  - microcode
+  - modconf
+  - kms
+  - keyboard
+  - sd-vconsole
+  - block
+  - filesystems
+  - fsck
+common_bootloader_mkinitcpio_presets:
+  - default
+  - fallback
+
+common_bootloader_bootstrap_phase: false

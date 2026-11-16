@@ -149,6 +149,7 @@
   vars:
     common_bootloader_root_partition_path: '{{ bootstrap_partition_primary_disk.root_partition_path }}'
     common_bootloader_boot_mount_point: '{{ bootstrap_mount_point.boot }}'
+    common_bootloader_bootstrap_phase: true
 
 - name: Import common_network role
   ansible.builtin.include_role:
