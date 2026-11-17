@@ -21,12 +21,6 @@
     apply:
       become_user: '{{ arch_dev_user_name }}'
 
-- name: Lima VM configuration
-  ansible.builtin.include_tasks: lima.yml
-  args:
-    apply:
-      become_user: '{{ arch_dev_user_name }}'
-
 - name: KDE configuration
   ansible.builtin.include_tasks: kde.yml
   args:

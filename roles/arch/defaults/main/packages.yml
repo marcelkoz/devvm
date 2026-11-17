@@ -121,9 +121,3 @@ arch_vscode_extensions:
   - sst-dev.opencode
 
 arch_vscode_extensions_absent: []
-
-arch_lima_package_dependencies:
-  - git
-  - go
-  - make
-  - qemu
