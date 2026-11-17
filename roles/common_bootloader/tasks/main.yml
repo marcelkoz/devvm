@@ -35,6 +35,13 @@
   notify: Regenerate initramfs
   when: not common_bootloader_bootstrap_phase
 
+- name: Template kernel modules to load
+  ansible.builtin.template:
+    src: templates/modules.conf.j2
+    dest: /etc/modules-load.d/additional-modules.conf
+    mode: '{{ global_standard_file_permissions }}'
+  when: not common_bootloader_bootstrap_phase
+
 - name: Create systemd-boot configuration directories
   ansible.builtin.file:
     path: '{{ item }}'

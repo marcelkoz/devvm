@@ -25,3 +25,6 @@ common_bootloader_mkinitcpio_presets:
   - fallback
 
 common_bootloader_bootstrap_phase: false
+
+common_bootloader_kernel_modules:
+  - kvm
