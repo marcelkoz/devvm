@@ -1,0 +1,16 @@
+- name: Install lima dependencies
+  community.general.pacman:
+    name: '{{ arch_lima_package_dependencies }}'
+    state: present
+  become: true
+  become_user: root
+
+- name: Compile lima executable
+  community.general.make:
+    chdir: '{{ arch_git_third_party_repos_directory_path }}/lima'
+
+- name: Install lima executable
+  community.general.make:
+    chdir: '{{ arch_git_third_party_repos_directory_path }}/lima'
+    params: 'PREFIX={{ arch_lima_executable_directory_prefix }}'
+    target: install

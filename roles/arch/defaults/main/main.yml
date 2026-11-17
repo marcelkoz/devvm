@@ -8,7 +8,8 @@ arch_dev_user_groups:
 arch_dev_user_git_repos:
   dotfiles: https://github.com/marcelkoz/dotfiles
 
-arch_dev_user_third_party_git_repos: {}
+arch_dev_user_third_party_git_repos:
+  lima: https://github.com/lima-vm/lima
 
 arch_dev_user_home_directories:
   repos: Repos
@@ -67,3 +68,5 @@ arch_ai_module_repos_with_submodules:
   ansible_role: https://github.com/ansible-community/ai-forge
 
 arch_plasmalogin_service_override_directory: /etc/systemd/system/plasmalogin.service.d
+
+arch_lima_executable_directory_prefix: '{{ arch_dev_user_home_path }}/.local'
