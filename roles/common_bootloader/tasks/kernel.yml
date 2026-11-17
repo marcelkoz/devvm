@@ -1,0 +1,25 @@
+- name: Create mkinitcpio presets directory
+  ansible.builtin.file:
+    path: '{{ common_bootloader_mkinitcpio_preset_directory_path }}'
+    mode: '{{ global_standard_directory_permissions }}'
+    state: directory
+
+- name: Template mkinitcpio configuration file
+  ansible.builtin.template:
+    src: templates/mkinitcpio.conf.j2
+    dest: '{{ common_bootloader_mkinitcpio_config_file_path }}'
+    mode: '{{ global_standard_file_permissions }}'
+  notify: Regenerate initramfs
+
+- name: Template mkinitcpio preset file
+  ansible.builtin.template:
+    src: templates/linux.preset.j2
+    dest: '{{ common_bootloader_mkinitcpio_preset_file_path }}'
+    mode: '{{ global_standard_file_permissions }}'
+  notify: Regenerate initramfs
+
+- name: Template kernel modules to load
+  ansible.builtin.template:
+    src: templates/modules.conf.j2
+    dest: /etc/modules-load.d/additional-modules.conf
+    mode: '{{ global_standard_file_permissions }}'
