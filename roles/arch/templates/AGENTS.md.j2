@@ -15,3 +15,21 @@ When the current project is a git repository, use the basemind MCP server for fi
 Outside a repository, basemind has no index. Use the shell there.
 
 After edits, run the basemind `admin` mode `rescan` so new symbols are searchable.
+
+## Subagents
+
+A subagent runs in its own session with fresh context. It sees the prompt you write and the repository, not this conversation. Name the paths, symbols, and acceptance criteria it needs, and say whether it may edit. Ask for a compact report: `path:line` hits, the decision, and the risk, not file bodies. If a child contradicts the code, read the file yourself before acting.
+
+Delegate when the work is bounded and the answer is short. Do the work inline when you already know the file, the change is one line, or the answer depends on this conversation.
+
+- Locate code in an unfamiliar area: a read-only locator such as `explore` or `cavecrew-investigator`. It returns `path:line` rows and does not edit.
+- A mechanical edit to one or two files: `cavecrew-builder`. Typo fixes, single-function rewrites, renames.
+- Reviewing a diff before you commit: `cavecrew-reviewer`. Findings by severity, no edits.
+- Mapping a repository you have never opened, or chasing one question across many files: `explore`.
+- Several independent tasks at once: one `general` child per task, launched together.
+
+Do not delegate these:
+
+- Destructive or irreversible work: disk partitioning, data migrations, deployments, history rewrites. A human runs them.
+- Commits, pushes, or other git writes. A child follows the same git policy as you, but you review the result.
+- Anything that needs secret, credential, or environment file contents.
