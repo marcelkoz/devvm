@@ -18,6 +18,7 @@ Two-phase deployment:
 
 - **`site.yml`**: Master playbook orchestrating deployment via tags.
 - **`pb_update_mirrors.yml`**: Pacman mirror selection (runs automatically during bootstrap).
+- **`pb_arch_backup.yml`**: Adhoc backup of select directories to the control node.
 
 
 ### Phase 1: Bootstrap
@@ -59,6 +60,16 @@ ansible-playbook site.yml --tags arch_pacman_unlock
 ```
 
 That run removes only the lock file. Rerun the normal phase 2 command afterwards.
+
+## Backups
+
+`pb_arch_backup.yml` archives the directories listed in `arch_backup_source_paths` on the target and fetches the archive to `~/Documents/DevVMBackups/` on the control node.
+
+```bash
+ansible-playbook pb_arch_backup.yml --limit <inventory-host>
+```
+
+Source paths are resolved from `roles/arch/defaults/main/main.yml`, which this playbook loads directly. An `arch_dev_user_*` override in `hosts.yml` therefore does not change the backup path; pass extra vars instead.
 
 ## Configuration
 

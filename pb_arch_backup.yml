@@ -1,0 +1,80 @@
+- name: Back up arch developer data
+  hosts: all
+  become: true
+
+  vars_files:
+    # Resolve the developer account, home directory and repo path from the
+    # arch role defaults. Only extra vars override these values here; an
+    # arch_dev_user_* override in hosts.yml does not reach this playbook.
+    - roles/arch/defaults/main/main.yml
+
+  vars:
+    arch_backup_source_paths:
+      - '{{ arch_git_repos_directory_path }}'
+    arch_backup_controller_directory: '{{ lookup("env", "HOME") }}/Backups'
+    arch_backup_archive_mode: '0600'
+    arch_backup_remote_tmp_directory: /var/tmp
+
+  tasks:
+    - name: Check backup source paths
+      ansible.builtin.stat:
+        path: '{{ item }}'
+      loop: '{{ arch_backup_source_paths }}'
+      register: arch_backup_source_stats
+
+    - name: Assert backup source paths exist
+      ansible.builtin.assert:
+        that:
+          - item.stat.exists
+          - item.stat.isdir
+        fail_msg: 'Backup source {{ item.item }} is missing or not a directory.'
+        quiet: true
+      loop: '{{ arch_backup_source_stats.results }}'
+      loop_control:
+        label: '{{ item.item }}'
+
+    - name: Create backup directory on the control node
+      ansible.builtin.file:
+        path: '{{ arch_backup_controller_directory }}'
+        state: directory
+        mode: '{{ global_standard_directory_permissions }}'
+      delegate_to: localhost
+      become: false
+
+    - name: Backup sources and pull the archive to the control node
+      when: not ansible_check_mode
+      block:
+        - name: Create temporary backup directory on the target
+          ansible.builtin.tempfile:
+            state: directory
+            prefix: ansible-arch-backup-
+            path: '{{ arch_backup_remote_tmp_directory }}'
+          register: arch_backup_remote_tmp
+
+        - name: Create archive on the target
+          community.general.archive:
+            path: '{{ arch_backup_source_paths }}'
+            dest: '{{ arch_backup_remote_tmp.path }}/backup.tar.gz'
+            format: gz
+            mode: '{{ arch_backup_archive_mode }}'
+
+        - name: Transfer archive to the control node
+          ansible.builtin.fetch:
+            src: '{{ arch_backup_remote_tmp.path }}/backup.tar.gz'
+            dest: '{{ arch_backup_controller_directory }}/{{ inventory_hostname }}-arch-backup-{{ now().strftime("%Y%m%dT%H%M%S") }}.tar.gz'
+            flat: true
+          register: arch_backup_fetched
+
+        - name: Restrict permissions on the control node archive
+          ansible.builtin.file:
+            path: '{{ arch_backup_fetched.dest }}'
+            mode: '{{ arch_backup_archive_mode }}'
+          delegate_to: localhost
+          become: false
+
+      always:
+        - name: Delete temporary backup directory on the target
+          ansible.builtin.file:
+            path: '{{ arch_backup_remote_tmp.path }}'
+            state: absent
+          when: arch_backup_remote_tmp.path is defined

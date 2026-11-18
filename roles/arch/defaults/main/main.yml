@@ -18,6 +18,7 @@ arch_dev_user_home_directories:
   documents: Documents
   scratch: Scratch
   pictures: Pictures
+  backups: Backups
 
 arch_git_repos_directory_path: '{{ arch_dev_user_home_path }}/{{ arch_dev_user_home_directories.repos }}'
 arch_git_third_party_repos_directory_path: '{{ arch_dev_user_home_path }}/{{ arch_dev_user_home_directories.third_party_repos }}'
