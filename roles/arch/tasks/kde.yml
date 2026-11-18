@@ -98,3 +98,9 @@
     - code-oss.desktop
     - kitty.desktop
     - org.kde.konsole.desktop
+
+- name: Patch Bruno flatpak desktop entry
+  ansible.builtin.template:
+    src: templates/com.usebruno.Bruno.desktop.j2
+    dest: '{{ arch_dev_user_home_path }}/.local/share/applications/com.usebruno.Bruno.desktop'
+    mode: '{{ global_standard_directory_permissions }}'
