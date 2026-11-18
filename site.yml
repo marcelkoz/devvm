@@ -1,7 +1,9 @@
 - name: Bootstrap arch configuration (within live environment)
   hosts: all
   become: true
-  tags: bootstrap
+  tags:
+    - never
+    - bootstrap
 
   roles:
     - bootstrap
