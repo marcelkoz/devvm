@@ -61,6 +61,7 @@ arch_ai_module_repos:
   ponytail: https://github.com/DietrichGebert/ponytail
   caveman: https://github.com/JuliusBrussee/caveman
   docmd: https://github.com/docmd-io/docmd-skills
+  asd_ste100: https://github.com/danyuchn/asd-ste100-skill
 
 arch_ai_module_repos_with_submodules:
   ansible_collection_standards: https://github.com/ansible-community/ai-forge
